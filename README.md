@@ -90,8 +90,8 @@ Lorsqu'on crée un champ, la méthode retourne un objet qui comporte des méthodes 
 Pour ajouter un attribut à un champ donné, on appelle simplement la méthode en indiquant en paramètre le nom de l'attribut et la valeur à y assigner. Notez que la valeur est optionnelle.
 Reprenons l'exemple montré plus haut :
 
-    $zone_texte->setAttribute('cols', 50);
-    $zone_texte->setAttribute('rows', 10);
+        $zone_texte->setAttribute('cols', 50);
+        $zone_texte->setAttribute('rows', 10);
 
 Le résultat correspondra alors à la balise html suivante :
 
