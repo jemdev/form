@@ -126,7 +126,9 @@ Une liste des règles de validation pré-existantes sera indiquée plus loin, ainsi
 -    textarea
 -    datalist
  - addOption
+
 ###Les règles de validation
+
 Il existe déjà des règles génériques disponibles pour valider les données d'un formulaire :
 
 -    *required* :
