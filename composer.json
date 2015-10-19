@@ -1,0 +1,30 @@
+{
+    "name"       : "mje/form",
+    "description": "Form management library.",
+    "type"       : "library",
+    "keywords"   : ["library", "form", "data", "html", "validation","namespace"],
+    "homepage"   : "http://jem-web.info/",
+    "license"    : "CeCILL",
+    "authors"    : [
+        {
+            "name" : "Jean Molliné",
+            "email": "jmolline@gmail.com"
+        }
+    ],
+    "support": {
+        "email" : "jmolline@gmail.com"
+    },
+    "require": {
+        "php"    : ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "mje\\form\\": "."
+        }
+    },
+    "packages": {
+        "jem/form": {
+            "2.0.0" : {@composer.json}
+        }
+    }
+}
