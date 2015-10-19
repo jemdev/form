@@ -403,6 +403,7 @@ class form
             if($prop == 'doctype' && $val == 'HTML')
             {
                 $this->_formMethod = strtoupper($this->_formMethod);
+                $this->_setValidTags();
             }
         }
         else
