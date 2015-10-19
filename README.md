@@ -10,7 +10,7 @@ Il sera en outre possible d'étendre le système de validation en ajoutant une cla
 Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
 
         {  
-            "mje\form": "1.0"  
+            "jemdev/form": "dev-master"
         }  
 
 
