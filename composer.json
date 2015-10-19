@@ -1,5 +1,5 @@
 {
-    "name"       : "mje/form",
+    "name"       : "jemdev/form",
     "description": "Form management library.",
     "type"       : "library",
     "keywords"   : ["library", "form", "data", "html", "validation","namespace"],
@@ -19,12 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mje\\form\\": "."
-        }
-    },
-    "packages": {
-        "jem/form": {
-            "2.0.0" : {@composer.json}
+            "jemdev\\form\\": "."
         }
     }
 }
