@@ -302,7 +302,7 @@ Pour vous simplifier au maximum le travail, préparez un gabarit dont vous pourre
           </fieldset>
         </form>
 
-À ce stade, on a besoin que de la partie fieldset, n'utilisez pas la balise <FORM> qui sera de toutes façons intégrée automatiquement. On va mettre le contenu tel quel dans une variable PHP, ici en utilisant la syntaxe HEREDOC :
+À ce stade, on a besoin que de la partie fieldset, n'utilisez pas la balise *FORM* qui sera de toutes façons intégrée automatiquement. On va mettre le contenu tel quel dans une variable PHP, ici en utilisant la syntaxe HEREDOC :
 
         <?php
         $sForm = <<<CODE_HTML
