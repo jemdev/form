@@ -1,6 +1,6 @@
 <?php
-namespace mje\form\process;
-use mje\form\field;
+namespace jemdev\form\process;
+use jemdev\form\field;
 /**
  * @package     mje
  *

@@ -1,7 +1,7 @@
 <?php
-namespace mje\form\field\input;
-use mje\form\form;
-use mje\form\field\input;
+namespace jemdev\form\field\input;
+use jemdev\form\form;
+use jemdev\form\field\input;
 /**
  * @package     mje
  *
@@ -24,7 +24,7 @@ class visible extends input
     /**
      * Constructeur.
      *
-     * Cette classe étant appelée via la méthode mje\form::__call, les
+     * Cette classe étant appelée via la méthode jemdev\form::__call, les
      * paramètres envoyés individuellement arrivent ici sous la forme
      * d'un tableau indexé.
      * Les paramètres réellement attendus sont les attributs de base :

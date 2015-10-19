@@ -1,11 +1,11 @@
 <?php
-namespace mje\form;
-use mje\form\field\select;
-use mje\form\field\textarea;
-use mje\form\field\input\hidden;
-use mje\form\field\input\visible;
-use mje\form\process\validation;
-use mje\form\process\cleform;
+namespace jemdev\form;
+use jemdev\form\field\select;
+use jemdev\form\field\textarea;
+use jemdev\form\field\input\hidden;
+use jemdev\form\field\input\visible;
+use jemdev\form\process\validation;
+use jemdev\form\process\cleform;
 
 /**
  * @package     mje
@@ -190,10 +190,10 @@ class form
     /**
      * Fichier de messages selon la langue.
      * Ce fichier concerne esentiellement le développeur dans son utilisation du package
-     * mje\form pour construire ses formulaires, les messages traitant les erreurs qu'il
+     * jemdev\form pour construire ses formulaires, les messages traitant les erreurs qu'il
      * puorrais commettre ponctuellement.
      *
-     * @var mje\form\locale\langInterface
+     * @var jemdev\form\locale\langInterface
      */
     public $oLang;
     /**
@@ -242,7 +242,7 @@ class form
      *
      * En appelant une méthode de classe comme apr exemple text(), l'appel
      * sera transformé en création d'une instance de la classe
-     * mje\form\field\input\text.
+     * jemdev\form\field\input\text.
      * Exemple :
      * <code>
      * $login = $oForm->text('login');
@@ -251,7 +251,7 @@ class form
      *       ->setAttribute('tabindex', '2');
      * </code>
      * On notera que dans ce code, on appelle une méthode setAttribute
-     * qui n'existe pas davantage dans la classe mje\form\form : mais on
+     * qui n'existe pas davantage dans la classe jemdev\form\form : mais on
      * travaille en réalit avec une instance de la classe d'élément, et
      * donc avec ses méthodes.
      *

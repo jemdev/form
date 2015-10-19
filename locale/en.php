@@ -1,5 +1,5 @@
 <?php
-namespace mje\form\locale;
+namespace jemdev\form\locale;
 /**
  * @package     mje
  *

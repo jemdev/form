@@ -1,5 +1,5 @@
 <?php
-namespace mje\form\tags;
+namespace jemdev\form\tags;
 
 /**
  * @author Cyrano

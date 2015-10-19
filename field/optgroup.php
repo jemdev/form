@@ -1,8 +1,8 @@
 <?php
-namespace mje\form\field;
-use mje\form\form;
-use mje\form\field;
-use mje\form\field\option;
+namespace jemdev\form\field;
+use jemdev\form\form;
+use jemdev\form\field;
+use jemdev\form\field\option;
 /**
  * @package     mje
  *

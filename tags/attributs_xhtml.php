@@ -1,6 +1,6 @@
 <?php
-namespace mje\form\tags;
-use mje\form\form;
+namespace jemdev\form\tags;
+use jemdev\form\form;
 /**
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications

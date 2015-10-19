@@ -1,7 +1,7 @@
 <?php
-namespace mje\form;
-use mje\form\form;
-use mje\form\field;
+namespace jemdev\form;
+use jemdev\form\form;
+use jemdev\form\field;
 /**
  * @package     mje
  *

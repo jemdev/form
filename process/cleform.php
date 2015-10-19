@@ -1,5 +1,5 @@
 <?php
-namespace mje\form\process;
+namespace jemdev\form\process;
 /**
  * @package     mje
  *

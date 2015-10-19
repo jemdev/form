@@ -1,9 +1,9 @@
 <?php
-namespace mje\form;
-use mje\form\form;
-use mje\form\process\validation;
-use mje\form\tags\attributs_html5;
-use mje\form\tags\attributs_xhtml;
+namespace jemdev\form;
+use jemdev\form\form;
+use jemdev\form\process\validation;
+use jemdev\form\tags\attributs_html5;
+use jemdev\form\tags\attributs_xhtml;
 /**
  * @package     mje
  *
@@ -25,7 +25,7 @@ abstract class field
 {
     /**
      * Classe définissant les attributs valides pour une balise données dans un formulaire.
-     * @var mje\form\tags\attributesInterface
+     * @var jemdev\form\tags\attributesInterface
      */
     private $_oAttributes;
     private $_aDoctypes     = array('HTML','XHTML','HTML5');
@@ -327,7 +327,7 @@ abstract class field
      * Enregistre une règle de validation pour le champ créé.
      *
      * On peut enregistrer autant de règles que nécessaire pour le champ traité.
-     * Le premier paramètre sera l'une des regles définies dans mje\form\process\validation
+     * Le premier paramètre sera l'une des regles définies dans jemdev\form\process\validation
      *
      * Ce second paramètre sera toujours un tableau indexé avec une à n valeurs.
      * le second paramètre sera indispensable pour les règles suivantes :
@@ -346,7 +346,7 @@ abstract class field
      * @param   String  $rule       Nom de la règle à appliquer
      * @param   String  $msg        Message à afficher si règle non vérifiée.
      * @param   Array   $val        Valeur à vérifier (Optionnel selon la règle à appliquer)
-     * @see     mje\form\process\validation
+     * @see     jemdev\form\process\validation
      * @todo    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
      *          de tableaux que de valeurs scalaires.
      */
