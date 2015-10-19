@@ -1,11 +1,12 @@
-#mje\form
+#jemdev\form
 Package de gestion de formulaires.
 
-Ce package permet de créer des formulaires HTML et de gérer la validation des données. Malgré le nombre de fichiers inclus dans ce package, la seule classe qui va nous intéresser est la classe mje\form, toutes les opérations passant par là.
+Ce package permet de créer des formulaires HTML et de gérer la validation des données. Malgré le nombre de fichiers inclus dans ce package, la seule classe qui va nous intéresser est la classe jemdev\form, toutes les opérations passant par là.
 
 Notez par ailleurs que ce package ne gère absolument pas la mise en page des formulaires, cette tâche étant à prendre en charge dans les gabarits au moment de l'intégration. Ce package permet cependant de créer les différents champs qui seront inclus dans le code (X)HTML et permettra de définir des règles de validation pour chaque champ si nécessaire.
 Il sera en outre possible d'étendre le système de validation en ajoutant une classe utilisateur comportant des méthodes de validation spécifiques qui ne seraient pas couvertes par les méthodes natives du package.
 
+####Note for english speaking users : English is not my native language, if you're interested to use jemdev\form in your project, if your native language is english, if you understand french speaking and if you want to make a translation, fell free to do so.
 ## Installation
 Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
 
@@ -21,30 +22,30 @@ La création d'une instance va initialiser le formulaire lui-même. Cependant, on 
         /**  
          * Création de l'instance de formulaire  
          */  
-        $oForm = new mje\form('form_id', 'post');  
+        $oForm = new jemdev\form('form_id', 'post');  
 
 
 Notez ici qu'on précise uniquement l'identifiant du formulaire et la méthode utilisée. Ces paramètres sont tous facultatifs, cependant, il y aura automatiquement un identifiant d'inséré, « form » et par défaut la méthode sera « get ». On peut en outre préciser l'attribut action : par défaut, ce sera l'adresse de la page courante, mais on peut en indiquer une autre.
 On peut ensuite indiquer l'attribut enctype : par défaut, la valeur sera « application/x-www-form-urlencoded » mais sera automatiquement changée en « multipart/form-data » si un champ input de type file est créé. Il est recommandé de ne rien indiquer du tout.
 Enfin, on peut indiquer une ou plusieurs classes de validation spécifiques, ce point particulier sera vu plus loin.
 ### Quel DOCTYPE
-Par défaut, les champs seront créés selon la syntaxe XHTML 1.0. Cependant, il est possible d'indiquer une autre DTD. Par exemple, pour construire un formulaire HTML, on assigera la valeur à une propriété publique de la classe mje\form :
+Par défaut, les champs seront créés selon la syntaxe XHTML 1.0. Cependant, il est possible d'indiquer une autre DTD. Par exemple, pour construire un formulaire HTML, on assigera la valeur à une propriété publique de la classe jemdev\form :
 
         /* Changer le DOCTYPE */  
         $oForm->_sDoctype = 'HTML5';  
 
 
-##Méthodes publiques du packages mje\form
+##Méthodes publiques du packages jemdev\form
 Ce package et inspiré à l'origine de PEAR/HTML_QuickForm. Cependant, à l'époque où la première version de hem\form a été conçu, l'idée de base consistait à disposer d'un outil en PHP5.
 
 Ce package est présenté aujurd'hui dans une version 2 intégrant les *namspaces* qui n'existaient pas encore en PHP. L'autre point essentiel à prendre en considération est que les packages que proposaient les frameworks majeurs du moment avaient la fâcheuse tendance à mélanger les genres, à savoir la gestion des données du formulaire et l'affichage de ce même formulaire.
-mje\form gère la création des champs et la validation des données saisies, mais l'aspect visuel du formulaire relève d'un processus à part qui n'est pas traité ici. Les seuls aspects visuels tiennent dans les balises (X)HTML des champs de formulaire, pas à leur intégration dans le formulaire lui-même.
-###Les méthodes de la classe mje\form\form
-Le principe de création d'un champ de formulaire a été aussi simplifié que possible. À partir de l'objet mje\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
+jemdev\form gère la création des champs et la validation des données saisies, mais l'aspect visuel du formulaire relève d'un processus à part qui n'est pas traité ici. Les seuls aspects visuels tiennent dans les balises (X)HTML des champs de formulaire, pas à leur intégration dans le formulaire lui-même.
+###Les méthodes de la classe jemdev\form\form
+Le principe de création d'un champ de formulaire a été aussi simplifié que possible. À partir de l'objet jemdev\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
 Par exemple, pour un champ de type *textarea* :
 
     /* Création de l'instance de formulaire */
-    $oForm = new mje\form\form('identifiant_form', 'post');
+    $oForm = new jemdev\form\form('identifiant_form', 'post');
     /* Création d'un champ de saisie */
     $zone_texte = $oForm->textarea('id_zone_texte');
 
@@ -81,7 +82,7 @@ Voyons d'abord la liste des champs qu'on peut créer.
 Notez l'absence du champ *input* : c'est voulu pour des raisons de simplification. On peut en revanche observer la présence de champs qui correspondent aux types possible d'un champ *input* : *hidden*, *text*, *radio*, etc...
 Quel que soit le champ que l'on souhaite créer, la méthode est la même que montrée plus haut avec un *textarea*.
 
-###Les méthodes sur les objets créés à partir de mje\form\form
+###Les méthodes sur les objets créés à partir de jemdev\form\form
 Lorsqu'on crée un champ, la méthode retourne un objet qui comporte des méthodes qui deviennent utilisables pour compléter certaines propriétés de ce champ.
 ####méthodes communes pour tous les champs
 -    setLabel($label) : Permet d'indiquer le texte d'un label qui sera rattaché au champ. Notez cependant que la balise *label* ne sera pas créée, seule la propriété du champ sera stockée et disponible.
@@ -216,9 +217,9 @@ Exemple :
 ###Définir des règles de validation personnalisées.
 Pour les cas où il ne sera pas possible de définir une expression régulière pour valider un champ donné, il reste possible d'ajouter des méthodes de validation supplémentaires au système de gestion des formulaires.
 Généralement, ce sera indispensable lorsqu'il s'agira de collecter des informations de contrôle dans une base de données par exemple ou d'une source externe quelconque.
-Pour ce faire, on définira une classe étendant mje\form\process\validation. Pour simplifier, voici un modèle qui pourra vous servir de base :
+Pour ce faire, on définira une classe étendant jemdev\form\process\validation. Pour simplifier, voici un modèle qui pourra vous servir de base :
 
-        class helpers_validationsupplementaire extends mje_form_process_validation
+        class helpers_validationsupplementaire extends jemdev_form_process_validation
         {
             public static $aMethodesSupplementaires = array(
                 'autreMethodeValidation'
@@ -277,7 +278,7 @@ Pour que vos règles de validation personnalisées soient prises en compte, il con
         /**
          * Création de l'instance de formulaire
          */
-        $oForm = new mje\form\form('test', 'post', null, $aClassValidExterne);
+        $oForm = new jemdev\form\form('test', 'post', null, $aClassValidExterne);
 
 Notez que la classe supplémentaire est indiquée en quatrième paramètre lors de la création de l'instance du formulaire. On peut mettre le troisième paramètre à NULL dans la mesure où une valeur sera mise par défaut et automatiquement modifiée si nécessaire lors de l'ajout d'un champ input de type FILE.
 Vous pouvez maintenant appliquer la règle personnalisée sur le champ approprié comme vu ci-dessus.
@@ -332,7 +333,7 @@ Maintenant, on va remplacer certaines parties « en dur » par des variables PHP. 
 
 Observez les lignes où se trouvent les champs : vous pouvez voir qu'on indique les variables entre accolades « { » et « } » et qu'on peut appeler deux propriétés. Ces variables sont en effet des objets et comportent donc des propriété : id et label que vous aurez définis lors de la création des champs. La variable mise seule entre accolade fera appel à la méthode __toString de l'instance qui retournera le code HTML de la balise.
 
-Cette façon de procéder vous laisse toute latitude pour structurer vos formulaires de la manière qui vous convient le mieux, rien n'est imposé à ce niveau et le package mje\form ne traite pas du tout l'affichage.
+Cette façon de procéder vous laisse toute latitude pour structurer vos formulaires de la manière qui vous convient le mieux, rien n'est imposé à ce niveau et le package jemdev\form ne traite pas du tout l'affichage.
 ###Ajouter le contenu et récupérer le code complet du formulaire.
 Une fois votre gabari défini et vos variables mise en place, et une fois que tous vos champs ont été créés, il ne reste qu'à récupérer le tout prêt à afficher dans votre page.
 
