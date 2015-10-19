@@ -6,7 +6,7 @@ Ce package permet de créer des formulaires HTML et de gérer la validation des do
 Notez par ailleurs que ce package ne gère absolument pas la mise en page des formulaires, cette tâche étant à prendre en charge dans les gabarits au moment de l'intégration. Ce package permet cependant de créer les différents champs qui seront inclus dans le code (X)HTML et permettra de définir des règles de validation pour chaque champ si nécessaire.
 Il sera en outre possible d'étendre le système de validation en ajoutant une classe utilisateur comportant des méthodes de validation spécifiques qui ne seraient pas couvertes par les méthodes natives du package.
 
-####Note for english speaking users : English is not my native language, if you're interested to use jemdev\form in your project, if your native language is english, if you understand french speaking and if you want to make a translation, fell free to do so.
+####Note for english speaking users : English is not my native language, if you're interested to use jemdev\form in your project, if your native language is english, if you understand french speaking and if you want to make a translation, feel free to do so.
 ## Installation
 Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
 
