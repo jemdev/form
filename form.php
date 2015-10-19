@@ -400,9 +400,12 @@ class form
         elseif(array_key_exists($prop, $this->_aProps))
         {
             $this->{$this->_aProps[$prop]} = $val;
-            if($prop == 'doctype' && $val == 'HTML')
+            if($prop == 'doctype')
             {
-                $this->_formMethod = strtoupper($this->_formMethod);
+                if($val == 'HTML')
+                {
+                    $this->_formMethod = strtoupper($this->_formMethod);
+                }
                 $this->_setValidTags();
             }
         }
