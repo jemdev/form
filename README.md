@@ -10,19 +10,23 @@ Il sera en outre possible d'étendre le système de validation en ajoutant une cla
 ## Installation
 Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
 
-        {  
-            "jemdev/form": "dev-master"
-        }  
+```
+{  
+    "jemdev/form": "dev-master"
+}
+```
 
 
 ## Mise en œuvre
 ### Création de l'instance de formulaire
 La création d'une instance va initialiser le formulaire lui-même. Cependant, on ne créera pas la balise <form> qui sera automatiquement créée assortie des attributs appropriés. On précisera ces éléments lors de la création de l'instance.
 
-        /**  
-         * Création de l'instance de formulaire  
-         */  
-        $oForm = new jemdev\form('form_id', 'post');  
+```php
+/**  
+ * Création de l'instance de formulaire  
+ */  
+$oForm = new jemdev\form('form_id', 'post');  
+```
 
 
 Notez ici qu'on précise uniquement l'identifiant du formulaire et la méthode utilisée. Ces paramètres sont tous facultatifs, cependant, il y aura automatiquement un identifiant d'inséré, « form » et par défaut la méthode sera « get ». On peut en outre préciser l'attribut action : par défaut, ce sera l'adresse de la page courante, mais on peut en indiquer une autre.
@@ -31,9 +35,10 @@ Enfin, on peut indiquer une ou plusieurs classes de validation spécifiques, ce p
 ### Quel DOCTYPE
 Par défaut, les champs seront créés selon la syntaxe XHTML 1.0. Cependant, il est possible d'indiquer une autre DTD. Par exemple, pour construire un formulaire HTML, on assigera la valeur à une propriété publique de la classe jemdev\form :
 
-        /* Changer le DOCTYPE */  
-        $oForm->_sDoctype = 'HTML5';  
-
+```php
+/* Changer le DOCTYPE */  
+$oForm->_sDoctype = 'HTML5';  
+```
 
 ##Méthodes publiques du packages jemdev\form
 Ce package et inspiré à l'origine de PEAR/HTML_QuickForm. Cependant, à l'époque où la première version de hem\form a été conçu, l'idée de base consistait à disposer d'un outil en PHP5.
@@ -44,10 +49,12 @@ jemdev\form gère la création des champs et la validation des données saisies, ma
 Le principe de création d'un champ de formulaire a été aussi simplifié que possible. À partir de l'objet jemdev\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
 Par exemple, pour un champ de type *textarea* :
 
-    /* Création de l'instance de formulaire */
-    $oForm = new jemdev\form\form('identifiant_form', 'post');
-    /* Création d'un champ de saisie */
-    $zone_texte = $oForm->textarea('id_zone_texte');
+```php
+/* Création de l'instance de formulaire */
+$oForm = new jemdev\form\form('identifiant_form', 'post');
+/* Création d'un champ de saisie */
+$zone_texte = $oForm->textarea('id_zone_texte');
+```
 
 Ce n'est pas plus compliqué que ça, le champ est prêt à être utilisé.
 
@@ -90,31 +97,42 @@ Lorsqu'on crée un champ, la méthode retourne un objet qui comporte des méthodes 
 Pour ajouter un attribut à un champ donné, on appelle simplement la méthode en indiquant en paramètre le nom de l'attribut et la valeur à y assigner. Notez que la valeur est optionnelle.
 Reprenons l'exemple montré plus haut :
 
-        $zone_texte->setAttribute('cols', 50);
-        $zone_texte->setAttribute('rows', 10);
+```php
+$zone_texte->setAttribute('cols', 50);
+$zone_texte->setAttribute('rows', 10);
+```
 
 Le résultat correspondra alors à la balise html suivante :
 
-    <textarea id="id_zone_texte" name="id_zone_texte" cols="50" rows="10"></textarea>
+```html
+<textarea id="id_zone_texte" name="id_zone_texte" cols="50" rows="10"></textarea>
+```
 
 L'exemple utilisé ici permet de souligner un cas particulier : cette balise ne comporte pas d'attribut *value*, la valeur étant affichée entre les deux balises. Cependant, il est possible d'indiquer le contenu de cette zone de saisie de la même manière que pour n'importe quel autre champ :
 
-    $zone_texte->setAttribute('value', "Contenu de la zone de saisie");
+```php
+$zone_texte->setAttribute('value', "Contenu de la zone de saisie");
+```
 
 Avec le résultat suivant : 
 
-    <textarea id="id_zone_texte" name="id_zone_texte" cols="50" rows="10">Contenu de la zone de saisie</textarea>
+```html
+<textarea id="id_zone_texte" name="id_zone_texte" cols="50" rows="10">Contenu de la zone de saisie</textarea>
+```
 
 Alors qu'avec un champ *input* de type *text*, le résultat sera conforme à ce qui est attendu :
 
-    /* Création d'un champ de saisie */
-    $zone_texte = $oForm->text('id_zone_texte');
-    $zone_texte->setAttribute('value', "Contenu de la zone de saisie");
+```php
+/* Création d'un champ de saisie */
+$zone_texte = $oForm->text('id_zone_texte');
+$zone_texte->setAttribute('value', "Contenu de la zone de saisie");
+```
 
 Résultat :
 
-    <input type="text" id="id_zone_texte" name="id_zone_texte" value="Contenu de la zone de saisie" />
-
+```html
+<input type="text" id="id_zone_texte" name="id_zone_texte" value="Contenu de la zone de saisie" />
+```
 
 -    setRule($rule, $msg[, $val]) :
 On peut indiquer des règles de validation. Deux paramètres sont obligatoires, le nom de la règle, et le message à afficher si la règle n'est pas respectée. En option, certaines règles requièrent un troisième paramètre qui sera généralement une valeur de contrôle.
@@ -210,59 +228,63 @@ Dès la création d'un objet pour un champ de formulaire donné, on peut chainer le
 
 Exemple :
 
-    $nom = $oForm->text('nom', 'nom')
-                 ->setLabel('Nom du client')
-                 ->setAttribute('class', 'classe_css_quelconque')
-                 ->setAttribute('value', $infosClient['nom])
-                 ->setRule('required', "Le nom du client est requis");
+```php
+$nom = $oForm->text('nom', 'nom')
+             ->setLabel('Nom du client')
+             ->setAttribute('class', 'classe_css_quelconque')
+             ->setAttribute('value', $infosClient['nom])
+             ->setRule('required', "Le nom du client est requis");
+```
 
 ###Définir des règles de validation personnalisées.
 Pour les cas où il ne sera pas possible de définir une expression régulière pour valider un champ donné, il reste possible d'ajouter des méthodes de validation supplémentaires au système de gestion des formulaires.
 Généralement, ce sera indispensable lorsqu'il s'agira de collecter des informations de contrôle dans une base de données par exemple ou d'une source externe quelconque.
 Pour ce faire, on définira une classe étendant jemdev\form\process\validation. Pour simplifier, voici un modèle qui pourra vous servir de base :
 
-        class helpers_validationsupplementaire extends jemdev_form_process_validation
+```php
+class helpers_validationsupplementaire extends jemdev_form_process_validation
+{
+    public static $aMethodesSupplementaires = array(
+        'autreMethodeValidation'
+    );
+    /**
+     * Constructeur.
+     *
+     * Crée l'instance parente et valide les données du formulaire.
+     *
+     */
+    public function __construct($aDatas, $oRules, $aExceptionErreurs)
+    {
+        parent::__construct($aDatas, $oRules, $aExceptionErreurs);
+        foreach(self::$aMethodesSupplementaires as $methode)
         {
-            public static $aMethodesSupplementaires = array(
-                'autreMethodeValidation'
-            );
-            /**
-             * Constructeur.
-             *
-             * Crée l'instance parente et valide les données du formulaire.
-             *
-             */
-            public function __construct($aDatas, $oRules, $aExceptionErreurs)
-            {
-                parent::__construct($aDatas, $oRules, $aExceptionErreurs);
-                foreach(self::$aMethodesSupplementaires as $methode)
-                {
-                    self::$methodesValidation[] = $methode;
-                }
-            }
-            public function __get($cle)
-            {
-                $authorise = array('aMethodesSupplementaires');
-                if(in_array($cle, $authorise))
-                {
-                    return $this->${$cle};
-                }
-            }
-
-            /**
-             * Vérifie la validité d'une donnée saisie.
-             *
-             * @param   mixed     $valeur
-             * @return  bool    Retourne TRUE si la valeur est falide, FALSE dans le cas contraire
-             */
-            public function _autreMethodeValidation($valeur)
-            {
-                /* Code validant la valeur saisie dans le formulaire et retournant un booléen */
-                //... $bValide = false; // <== Votre propre code définissant la valeur du retour
-                /* On retourne le résultat */
-                return $bValide;
-            }
+            self::$methodesValidation[] = $methode;
         }
+    }
+    public function __get($cle)
+    {
+        $authorise = array('aMethodesSupplementaires');
+        if(in_array($cle, $authorise))
+        {
+            return $this->${$cle};
+        }
+    }
+
+    /**
+     * Vérifie la validité d'une donnée saisie.
+     *
+     * @param   mixed     $valeur
+     * @return  bool    Retourne TRUE si la valeur est falide, FALSE dans le cas contraire
+     */
+    public function _autreMethodeValidation($valeur)
+    {
+        /* Code validant la valeur saisie dans le formulaire et retournant un booléen */
+        //... $bValide = false; // <== Votre propre code définissant la valeur du retour
+        /* On retourne le résultat */
+        return $bValide;
+    }
+}
+```
 
 Le nom de cette classe et la manière dont elle sera chargée dans votre application dépend de vous même et de l'architecture de votre application.
 
@@ -271,16 +293,18 @@ La partie qui nous intéresse essentiellement est la propriété de classe « $aMeth
 ### Mise en œuvre des méthodes de validation supplémentaires
 Pour que vos règles de validation personnalisées soient prises en compte, il convient d'abord de les définir avant la création de l'instance de formulaire. Ensuite, vous devrez préciser lors de la création de cette instance la liste des classes où ces règles supplémentaires devront être trouvées.
 
-        /* Le formulaire nécessitera des méthodes spécifiques de validation : on le chemin vers la classe appropriée */
-        $aClassValidExterne = array(
-            "chemin/vers/fichier/classe/specifique.php",
-            'nom_de_la_classe'
-        );
+```php
+/* Le formulaire nécessitera des méthodes spécifiques de validation : on le chemin vers la classe appropriée */
+$aClassValidExterne = array(
+    "chemin/vers/fichier/classe/specifique.php",
+    'nom_de_la_classe'
+);
 
-        /**
-         * Création de l'instance de formulaire
-         */
-        $oForm = new jemdev\form\form('test', 'post', null, $aClassValidExterne);
+/**
+ * Création de l'instance de formulaire
+ */
+$oForm = new jemdev\form\form('test', 'post', null, $aClassValidExterne);
+```
 
 Notez que la classe supplémentaire est indiquée en quatrième paramètre lors de la création de l'instance du formulaire. On peut mettre le troisième paramètre à NULL dans la mesure où une valeur sera mise par défaut et automatiquement modifiée si nécessaire lors de l'ajout d'un champ input de type FILE.
 Vous pouvez maintenant appliquer la règle personnalisée sur le champ approprié comme vu ci-dessus.
@@ -291,47 +315,53 @@ Il ne reste plus qu'à faire afficher le formulaire, pour ça, on va préparer un g
 ###Préparer un gabarit (template)
 Pour vous simplifier au maximum le travail, préparez un gabarit dont vous pourrez ajuster la mise en forme sous forme HTML. Exemple basique de formulaire tel qu'il sera finalement affiché :
 
-        <form id="template_form" action="#" method="post">
-          <fieldset>
-            <legend>Les champs de mon formulaire</legend>
-            <p>
-              <label for="nom">Votre nom</label>
-              <input type="text" name="nom" id="nom" value="" />
-            </p>
-            <input type="submit" id="envoi" name="envoi" value="Envoyer les données" />
-          </fieldset>
-        </form>
+```html
+<form id="template_form" action="#" method="post">
+  <fieldset>
+    <legend>Les champs de mon formulaire</legend>
+    <p>
+      <label for="nom">Votre nom</label>
+      <input type="text" name="nom" id="nom" value="" />
+    </p>
+    <input type="submit" id="envoi" name="envoi" value="Envoyer les données" />
+  </fieldset>
+</form>
+```
 
 À ce stade, on a besoin que de la partie fieldset, n'utilisez pas la balise *FORM* qui sera de toutes façons intégrée automatiquement. On va mettre le contenu tel quel dans une variable PHP, ici en utilisant la syntaxe HEREDOC :
 
-        <?php
-        $sForm = <<<CODE_HTML
-              <fieldset>
-                <legend>Les champs de mon formulaire</legend>
-                <p>
-                  <label for="nom">Votre nom</label>
-                  <input type="text" name="nom" id="nom" value="" />
-                </p>
-                <input type="submit" id="envoi" name="envoi" value="Envoyer les données" />
-              </fieldset>
+```php
+<?php
+$sForm = <<<CODE_HTML
+      <fieldset>
+        <legend>Les champs de mon formulaire</legend>
+        <p>
+          <label for="nom">Votre nom</label>
+          <input type="text" name="nom" id="nom" value="" />
+        </p>
+        <input type="submit" id="envoi" name="envoi" value="Envoyer les données" />
+      </fieldset>
 
-        CODE_HTML;
+CODE_HTML;
+```
 
 ###Intégrer les champs dynamiques
 Maintenant, on va remplacer certaines parties « en dur » par des variables PHP. Le code final ressemblera à ceci :
 
-        <?php
-        $sForm = <<<CODE_HTML
-              <fieldset>
-                <legend>Les champs de mon formulaire</legend>
-                <p>
-                  <label for="{$nom->id}">{$nom->label}</label>
-                  {$nom}
-                </p>
-                {$envoi}
-              </fieldset>
+```php
+<?php
+$sForm = <<<CODE_HTML
+      <fieldset>
+        <legend>Les champs de mon formulaire</legend>
+        <p>
+          <label for="{$nom->id}">{$nom->label}</label>
+          {$nom}
+        </p>
+        {$envoi}
+      </fieldset>
 
-        CODE_HTML;
+CODE_HTML;
+```
 
 Observez les lignes où se trouvent les champs : vous pouvez voir qu'on indique les variables entre accolades « { » et « } » et qu'on peut appeler deux propriétés. Ces variables sont en effet des objets et comportent donc des propriété : id et label que vous aurez définis lors de la création des champs. La variable mise seule entre accolade fera appel à la méthode __toString de l'instance qui retournera le code HTML de la balise.
 
@@ -339,21 +369,24 @@ Cette façon de procéder vous laisse toute latitude pour structurer vos formulair
 ###Ajouter le contenu et récupérer le code complet du formulaire.
 Une fois votre gabari défini et vos variables mise en place, et une fois que tous vos champs ont été créés, il ne reste qu'à récupérer le tout prêt à afficher dans votre page.
 
-        /* On définit le chemin vers le gabarit */
-        $form_tpl       = "chemin/vers/le/fichier/form.phtml";
-
+```php
+/* On définit le chemin vers le gabarit */
+$form_tpl       = "chemin/vers/le/fichier/form.phtml";
+```
 
 Notez que le fichier a ici une extension « .phtml » qui est relativement classique, mais rien ne vous empèche d'utiliser une autre extension, du genre « .tpl.php » par exemple. Néanmoins, je recommande « .phtml ».
 
-        /* On inclut le fichier gabarit */
-        include($form_tpl);
-        /**
-         * On indique à l'instance de formulaire que son contenu est la
-         * variable définie dans le gabarit, ici $sForm
-         */
-        $oForm->contenu = $sForm;
-        /* On récupère le code complet du formulaire */
-        $sFormulaire = sprintf('%s', $oForm);
+```php
+/* On inclut le fichier gabarit */
+include($form_tpl);
+/**
+ * On indique à l'instance de formulaire que son contenu est la
+ * variable définie dans le gabarit, ici $sForm
+ */
+$oForm->contenu = $sForm;
+/* On récupère le code complet du formulaire */
+$sFormulaire = sprintf('%s', $oForm);
+```
 
 Important : vous n'avez pas vu l'intégration des champs caché : normal, c'est ajouté automatiquement lors de la dernière opération.
 ## Conclusion
