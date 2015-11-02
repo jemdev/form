@@ -88,7 +88,7 @@ abstract class field
      * Sera utilisé par tous les champs de formulaire devant stocker des règles
      * de validation.
      *
-     * @var mjem\form\form
+     * @var jemdev\form\form
      */
     protected $_oForm;
     /**
