@@ -232,7 +232,7 @@ Exemple :
 $nom = $oForm->text('nom', 'nom')
              ->setLabel('Nom du client')
              ->setAttribute('class', 'classe_css_quelconque')
-             ->setAttribute('value', $infosClient['nom])
+             ->setAttribute('value', $infosClient['nom'])
              ->setRule('required', "Le nom du client est requis");
 ```
 

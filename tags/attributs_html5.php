@@ -1,25 +1,29 @@
 <?php
-namespace jemdev\form\tags;
-use jemdev\form\form;
 /**
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
  * que vous souhaitez. Vous devrez néanmoins respecter les termes
  * de la licence CeCILL dont le fichier est joint à cette librairie.
  *
- * @package     mje
+ * @package     jemdev
  * @see http://www.cecill.info/licences/Licence_CeCILL_V2-fr.html
  */
+namespace jemdev\form\tags;
+use jemdev\form\form;
 /**
  * Gestion des attributs html5 de balise d'éléments de formulaire.
  *
  * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
+ * @package     jemdev
  * @subpackage  Form
  * @version     0.1 alpha
  */
 class attributs_html5 implements attributesInterface
 {
+    /**
+     * Liste des types de champs de formulaire valides en HTML5.
+     * @var array
+     */
     public static $aFormTags = array(
         'textarea',
         'select',
@@ -217,7 +221,8 @@ class attributs_html5 implements attributesInterface
         )
     );
     /**
-     *
+     * Constructeur.
+     * Aucune action particulière à effectuer ici.
      */
     function __construct(){}
     /**

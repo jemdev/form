@@ -1,5 +1,5 @@
 <?php
-namespace field;
+namespace jemdev\form\field;
 use jemdev\form\form;
 use jemdev\form\field;
 use jemdev\form\field\option;
