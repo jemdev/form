@@ -12,7 +12,7 @@ Via composer, ajouter simplement ceci dans le require de votre fichier composer.
 
 ```
 {  
-    "jemdev/form": "2.0.*"
+    "jemdev/form": "dev-master"
 }
 ```
 
