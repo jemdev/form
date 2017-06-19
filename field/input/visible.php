@@ -75,7 +75,7 @@ class visible extends input
             $masque = "#([0-9]+)([A-Z])#";
             $nb = preg_replace($masque, "$1", $ini_size);
             $f  = preg_replace($masque, "$2", $ini_size);
-            $m  = ($f == 'M') ? 1024 : 1;
+            $m  = (($f == 'M') ? 1024 * 1024 : 1);
             $size = $nb * $m;
             $this->_oForm->hidden('MAX_FILE_SIZE', 'MAX_FILE_SIZE', $size);
         }
