@@ -32,7 +32,7 @@ class datalist extends field
         $this->_oForm               = $oForm;
         parent::__construct($oForm);
         $this->_aAttributs['id']    = $props[0];
-        $this->_aAttributs['name']  = (isset($props[1])) ? $props[1] : $props[0];
+        // $this->_aAttributs['name']  = (isset($props[1])) ? $props[1] : $props[0]; // Attribut name non valide dans cette balise HTML5
         $this->_contenu = '';
         $this->_nbOptions = 0;
     }

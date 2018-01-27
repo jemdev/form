@@ -123,7 +123,6 @@ abstract class field
     {
         $this->_oForm = $oForm;
         $this->_aExceptionErreurs = $oForm->_aExceptionErreurs;
-        $this->setListeAttributs($this->_tag, $this->_type);
         if($oForm instanceof form)
         {
             $rm      = strtoupper($oForm->_formMethod);
@@ -132,6 +131,8 @@ abstract class field
         {
             trigger_error("Erreur de transmission de l'objet Form.", E_USER_ERROR);
         }
+        $this->_sDoctype = $oForm->doctype;
+        $this->setListeAttributs($this->_tag, $this->_type);
         $aDatas = null;
         if($_SERVER['REQUEST_METHOD'] == $rm)
         {

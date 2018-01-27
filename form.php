@@ -6,6 +6,7 @@ use jemdev\form\field\input\hidden;
 use jemdev\form\field\input\visible;
 use jemdev\form\process\validation;
 use jemdev\form\process\cleform;
+use jemdev\form\field\datalist;
 
 /**
  * @package     mje
@@ -302,6 +303,17 @@ class form
             case 'textarea':
                 $o = new textarea($params, $this);
                 break;
+            case 'datalist':
+                if($this->_sDoctype == 'HTML5')
+                {
+                    $o = new datalist($params, $this);
+                }
+                else
+                {
+                    $msg = sprintf($this->_aExceptionErreurs['balise_html5'], $methode, $this->_sDoctype);
+                    trigger_error($msg, E_USER_NOTICE);
+                }
+                break;
             case 'select':
                 $o = new select($params, $this);
                 break;
@@ -342,6 +354,10 @@ class form
         elseif($id == 'erreurs')
         {
             return $this->_aErreursValidation;
+        }
+        elseif($id == 'doctype' || $id == 'sDoctype')
+        {
+            return $this->_sDoctype;
         }
         elseif($id == '_aExceptionErreurs')
         {
