@@ -44,13 +44,13 @@ class datalist extends field
      * @param   String  $affiche    Valeur affichée dans la liste de sélection
      * @return  Object
      */
-    public function addOption($valeur, $affiche)
+    public function addOption($valeur, $affiche, $selected = false, $options = null)
     {
         if(!isset($this->_oOption))
         {
             $this->_oOption = new option($this->_oForm);
         }
-        $this->_oOption->addValue($valeur, $affiche, false, '');
+        $this->_oOption->addValue($valeur, $affiche, $selected, $options);
         $this->_nbOptions++;
         return $this;
     }
