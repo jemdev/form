@@ -50,7 +50,7 @@ class datalist extends field
         {
             $this->_oOption = new option($this->_oForm);
         }
-        $this->_oOption->addValue($valeur, $affiche, $selected, $options);
+        $this->_oOption->addValue($valeur, $affiche, $selected, null, $options);
         $this->_nbOptions++;
         return $this;
     }
