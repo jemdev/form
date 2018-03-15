@@ -50,10 +50,13 @@ class option extends field
     {
         $this->_value   = $value;
         $this->_affiche = $affiche;
-        if(isset($this->_aSentDatas) && array_key_exists($selectParentName, $this->_aSentDatas) && $this->_aSentDatas[$selectParentName] == $value && false !== $selected)
+        if(false !== $selected)
         {
-            $this->_aAttributs['selected'] = 'selected';
-            $this->_valSelected == $value;
+            if(isset($this->_aSentDatas) && array_key_exists($selectParentName, $this->_aSentDatas) && $this->_aSentDatas[$selectParentName] == $value)
+            {
+                $this->_aAttributs['selected'] = 'selected';
+                $this->_valSelected == $value;
+            }
         }
         elseif(true === $selected)
         {
