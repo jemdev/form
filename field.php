@@ -178,7 +178,10 @@ abstract class field
             }
             foreach ($attrs as $attr)
             {
-                $this->_aAttributs[$attr] = null;
+                if(isset($this->_aAttributs[$attr]))
+                {
+                    $this->_aAttributs[$attr] = null;
+                }
             }
         }
     }
