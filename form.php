@@ -61,7 +61,7 @@ class form
      *
      * @var String
      */
-    private $_sDoctype      = 'XHTML';
+    private $_sDoctype      = 'HTML5';
     private $_aValidDoctypes = array('HTML','HTML5','XHTML');
     /**
      * Identifiant du formulaire (attribut id)
@@ -277,7 +277,7 @@ class form
      * @param   Array   $params
      * @return  field
      */
-    public function __call($methode, $params)
+    public function __call($methode, $params): field
     {
         if(in_array($methode, $this->_aValidTags['input']))
         {
