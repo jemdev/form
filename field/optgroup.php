@@ -13,7 +13,7 @@ use jemdev\form\field\option;
  * {@see http://www.cecill.info/licences/Licence_CeCILL_V2-fr.html}
  */
 /**
- * Enter description here...
+ * Groupe dans une liste de sélection.
  *
  * @author      Jean Molliné <jmolline@gmail.com>
  * @package     mje

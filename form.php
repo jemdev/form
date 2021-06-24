@@ -137,7 +137,7 @@ class form
      */
     private $_aValidTags = array();
     /**
-     * @var mjem\form\process\cleform
+     * @var jemdev\form\process\cleform
      */
     private $_oCle;
     /**
@@ -253,7 +253,7 @@ class form
      * </code>
      * On notera que dans ce code, on appelle une méthode setAttribute
      * qui n'existe pas davantage dans la classe jemdev\form\form : mais on
-     * travaille en réalit avec une instance de la classe d'élément, et
+     * travaille en réalité avec une instance de la classe d'élément, et
      * donc avec ses méthodes.
      *
      * On peut également créer l'instance en envoyant plusieurs paramètres.

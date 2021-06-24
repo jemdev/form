@@ -68,10 +68,9 @@ class select extends field
      */
     public function __construct($props, form $oForm)
     {
+        parent::__construct($oForm);
         $this->_tag                 = 'select';
         $this->_type                = 'select';
-        $this->_oForm               = $oForm;
-        parent::__construct($oForm);
         $this->_aAttributs['id']    = $props[0];
         $this->_aAttributs['name']  = (isset($props[1])) ? $props[1] : $props[0];
         $this->_contenu = '';

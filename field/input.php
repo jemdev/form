@@ -38,9 +38,9 @@ abstract class input extends field
      */
     public function __construct($id, $type, form $oForm)
     {
+        parent::__construct($oForm);
         $this->_tag = 'input';
         $this->_type = $type;
-        parent::__construct($oForm);
     }
 
     public function __toString()
