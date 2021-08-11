@@ -9,6 +9,13 @@
 		}
 	],
 	"minimum-stability" : "dev",
+	"keywords" : [
+		"formulaire",
+		"HTML",
+		"validation",
+		"XHTML",
+		"HTML5"
+	],
 	"autoload" : {
 		"classmap" : [
 			"form.php",
@@ -33,8 +40,5 @@
 			"tags/attributs_html5.php",
 			"tags/attributs_xhtml.php"
 		]
-	},
-	"keywords" : [
-		"formulaire HTML validation"
-	]
+	}
 }
