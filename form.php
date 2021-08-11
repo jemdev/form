@@ -1,5 +1,6 @@
 <?php
 namespace jemdev\form;
+
 use jemdev\form\field\select;
 use jemdev\form\field\textarea;
 use jemdev\form\field\input\hidden;
@@ -7,9 +8,12 @@ use jemdev\form\field\input\visible;
 use jemdev\form\process\validation;
 use jemdev\form\process\cleform;
 use jemdev\form\field\datalist;
+use jemdev\form\tags\attributs_html5;
+use jemdev\form\tags\attributs_html;
+use jemdev\form\tags\attributs_xhtml;
 
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -26,7 +30,7 @@ use jemdev\form\field\datalist;
 
 $al = array('fr', 'en');
 $l  = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array($_SERVER['HTTP_ACCEPT_LANGUAGE'], $al)) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 'fr';
-(defined('LOCALE_LANG')) || define('LOCALE_LANG', $l);
+(defined('JEMDEVFORM_LOCALE_LANG')) || define('JEMDEVFORM_LOCALE_LANG', $l);
 
 /**
  * Classe de gestion de formulaire
@@ -43,8 +47,8 @@ $l  = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array($_SERVER['HTTP_ACCEPT
  * préfixe et on mentionnera ainsi 'required' et non '_required'.<br />
  *
  * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @package     jemdev
+ * @subpackage  form
  * @version     2.0 Ré-écriture du package intégrant les NAMESPACES
  * @license     CeCILL V2
  * @todo        Messages d'erreur par défaut lors de la validation pour les méthodes génériques utilisées.
@@ -670,7 +674,7 @@ class form
 
     private function _setLang()
     {
-        $loc = (defined('LOCALE_LANG')) ? LOCALE_LANG : 'fr';
+        $loc = (defined('JEMDEVFORM_LOCALE_LANG')) ? JEMDEVFORM_LOCALE_LANG : 'fr';
         include(realpath(__DIR__ . DIRECTORY_SEPARATOR .'locale'. DIRECTORY_SEPARATOR .'lang.php'));
         $this->oLang = $oLang;
         $this->_aExceptionErreurs  = $oLang::$msgs_exceptions;
@@ -686,14 +690,14 @@ class form
         switch ($this->_sDoctype)
         {
             case 'HTML':
-                $this->_aValidTags = tags\attributs_html::$aFormTags;
+                $this->_aValidTags = attributs_html::$aFormTags;
                 break;
             case 'HTML5':
-                $this->_aValidTags = tags\attributs_html5::$aFormTags;
+                $this->_aValidTags = attributs_html5::$aFormTags;
                 break;
             case 'XHTML':
             default:
-                $this->_aValidTags = tags\attributs_xhtml::$aFormTags;
+                $this->_aValidTags = attributs_xhtml::$aFormTags;
         }
     }
 

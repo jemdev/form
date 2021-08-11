@@ -6,7 +6,7 @@ Ce package permet de créer des formulaires HTML et de gérer la validation des 
 Notez par ailleurs que ce package ne gère absolument pas la mise en page des formulaires, cette tâche étant à prendre en charge dans les gabarits au moment de l'intégration. Ce package permet cependant de créer les différents champs qui seront inclus dans le code (X)HTML et permettra de définir des règles de validation pour chaque champ si nécessaire.
 Il sera en outre possible d'étendre le système de validation en ajoutant une classe utilisateur comportant des méthodes de validation spécifiques qui ne seraient pas couvertes par les méthodes natives du package.
 
-#### Note for english speaking users : English is not my native language, if you're interested to use jemdev\form in your project, if your native language is english, if you understand french speaking and if you want to make a translation, feel free to do so.
+#### Note for English-speaking users: English is not my native language. If you are interested in the jemdem \ form package, if your native language is English and you understand French well, feel free to offer a translation that will always be appreciated.
 ## Installation
 Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
 
@@ -46,20 +46,37 @@ Ce package et inspiré à l'origine de *PEAR/HTML_QuickForm*. Cependant, à l'é
 Ce package est présenté aujourd'hui dans une version 2 intégrant les *namespaces* qui n'existaient pas encore en PHP. L'autre point essentiel à prendre en considération est que les packages que proposaient les frameworks majeurs du moment avaient la fâcheuse tendance à mélanger les genres, à savoir la gestion des données du formulaire et l'affichage de ce même formulaire.
 jemdev\form gère la création des champs et la validation des données saisies, mais l'aspect visuel du formulaire relève d'un processus à part qui n'est pas traité ici. Les seuls aspects visuels tiennent dans les balises (X)HTML des champs de formulaire, pas à leur intégration dans le formulaire lui-même.
 ### Les méthodes de la classe jemdev\form\form
-Le principe de création d'un champ de formulaire a été aussi simplifié que possible. À partir de l'objet jemdev\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
-Par exemple, pour un champ de type *textarea* :
+Le principe de création d'un champ de formulaire a été aussi simplifié que possible. 
 
 ```php
 /* Création de l'instance de formulaire */
 $oForm = new jemdev\form\form('identifiant_form', 'post');
-/* Création d'un champ de saisie */
-$zone_texte = $oForm->textarea('id_zone_texte');
 ```
 
 Ce n'est pas plus compliqué que ça, le champ est prêt à être utilisé.
 
+Vous pouvez également simplifier la création de l'instance en utilisant « `use` » :
+
+```php
+<?php
+// ...
+use jemdev\form\form;
+
+//.. La création de l'instance devient alors :
+$oForm = new form('identifiant_form', 'post');
+```
+
+À partir de l'objet jemdev\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
+Par exemple, pour un champ de type *textarea* :
+
+```php
+/* Création d'un champ de saisie */
+$zone_texte = $oForm->textarea('id_zone_texte');
+```
+
 On peut cependant ajouter des attributs à ce champ, nous verrons ce point  un peu plus loin.
 Voyons d'abord la liste des champs qu'on peut créer.
+
 #### champs communs à tous les DOCTYPES
 -    hidden
 -    select
@@ -364,7 +381,7 @@ $sForm = <<<CODE_HTML
 CODE_HTML;
 ```
 
-Observez les lignes où se trouvent les champs : vous pouvez voir qu'on indique les variables entre accolades « { » et « } » et qu'on peut appeler deux propriétés. Ces variables sont en effet des objets et comportent donc des propriété : id et label que vous aurez définis lors de la création des champs. La variable mise seule entre accolade fera appel à la méthode __toString de l'instance qui retournera le code HTML de la balise.
+Observez les lignes où se trouvent les champs : vous pouvez voir qu'on indique les variables entre accolades « { » et « } » et qu'on peut appeler deux propriétés. Ces variables sont en effet des objets et comportent donc des propriété : id et label que vous aurez définis lors de la création des champs. La variable mise seule entre accolade fera appel à la méthode `__toString` de l'instance qui retournera le code HTML de la balise.
 
 Cette façon de procéder vous laisse toute latitude pour structurer vos formulaires de la manière qui vous convient le mieux, rien n'est imposé à ce niveau et le package jemdev\form ne traite pas du tout l'affichage.
 ### Ajouter le contenu et récupérer le code complet du formulaire.

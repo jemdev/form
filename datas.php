@@ -1,7 +1,7 @@
 <?php
 namespace jemdev\form;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -16,7 +16,7 @@ namespace jemdev\form;
  * avec les valeurs saisies et/ou sélectionnées par l'utilisateur.
  *
  * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
+ * @package     jemdev
  * @subpackage  form
  */
 class datas extends form
@@ -35,7 +35,8 @@ class datas extends form
         {
             trigger_error("Erreur de transmission de l'objet Form.", E_USER_ERROR);
         }
-        if($_SERVER['REQUEST_METHOD'] == $rm)
+        $srm = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        if($srm == $rm)
         {
             $aDatas = array();
             switch ($rm)

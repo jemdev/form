@@ -1,25 +1,40 @@
 {
-    "name"       : "jemdev/form",
-    "description": "Form management library.",
-    "type"       : "library",
-    "keywords"   : ["library", "form", "data", "html", "validation","namespace"],
-    "homepage"   : "http://jem-web.info/",
-    "license"    : "CECILL-2.0",
-    "authors"    : [
-        {
-            "name" : "Jean Molliné",
-            "email": "jmolline@gmail.com"
-        }
-    ],
-    "support": {
-        "email" : "jmolline@gmail.com"
-    },
-    "require": {
-        "php"    : ">=5.4.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "jemdev\\form\\": "."
-        }
-    }
+	"name" : "jemdev/form",
+	"description" : "Package de gestion de formulaires",
+	"type" : "library",
+	"license" : "CeCILL",
+	"authors" : [{
+			"name" : "Jean Molliné",
+			"email" : "jmolline@jemdev.com"
+		}
+	],
+	"minimum-stability" : "dev",
+	"autoload" : {
+		"psr-4" : {
+			"jemdev\\chiffrement\\" : "."
+		},
+		"classmap" : [
+			"form.php",
+			"datas.php",
+			"field.php",
+			"groupe.php",
+			"formException.php",
+			"locale/fr.php",
+			"locale/en.php",
+			"field/datalist.php",
+			"field/input.php",
+			"field/optgroup.php",
+			"field/option.php",
+			"field/select.php",
+			"field/textarea.php",
+			"field/input/hidden.php",
+			"field/input/visible.php",
+			"process/cleform.php",
+			"process/validation.php",
+			"tags/attributesInterface.php",
+			"tags/attributs_html.php",
+			"tags/attributs_html5.php",
+			"tags/attributs_xhtml.php"
+		]
+	}
 }

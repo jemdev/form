@@ -69,7 +69,7 @@ class cleform
         /**
          * Récupération de L'Adresse IP de l'utilisateur.
          */
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
         /**
          * on utlilise mt_rand() pour avoir une valeur plus aléatoire qu’avec
          * la fonction rand(), et on passe true en paramètre à uniqid() pour

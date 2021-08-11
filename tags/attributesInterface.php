@@ -8,7 +8,7 @@ namespace jemdev\form\tags;
 interface attributesInterface
 {
     /**
-     * Liste des attributs xhtml valides pour une balise donnée.
+     * Liste des attributs valides pour une balise donnée.
      *
      * La méthode est statique, on a en effet nul besoin d'un objet
      *

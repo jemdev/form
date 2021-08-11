@@ -134,7 +134,8 @@ abstract class field
         $this->_sDoctype = $oForm->doctype;
         $this->setListeAttributs($this->_tag, $this->_type);
         $aDatas = null;
-        if($_SERVER['REQUEST_METHOD'] == $rm)
+        $srm = (isset($_SERVER['REQUEST_METHOD'])) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        if($srm == $rm)
         {
             switch ($rm)
             {
