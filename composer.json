@@ -2,7 +2,7 @@
 	"name" : "jemdev/form",
 	"description" : "Package de gestion de formulaires",
 	"type" : "library",
-	"license" : "CeCILL",
+	"license" : "CECILL-2.0",
 	"authors" : [{
 			"name" : "Jean Molliné",
 			"email" : "jmolline@jemdev.com"
