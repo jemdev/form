@@ -2,7 +2,7 @@
 	"name" : "jemdev/form",
 	"description" : "Package de gestion de formulaires",
 	"type" : "library",
-	"license" : "CeCILL",
+	"license" : "CECILL-2.0",
 	"authors" : [{
 			"name" : "Jean Molliné",
 			"email" : "jmolline@jemdev.com"
@@ -10,9 +10,6 @@
 	],
 	"minimum-stability" : "dev",
 	"autoload" : {
-		"psr-4" : {
-			"jemdev\\chiffrement\\" : "."
-		},
 		"classmap" : [
 			"form.php",
 			"datas.php",
@@ -36,5 +33,8 @@
 			"tags/attributs_html5.php",
 			"tags/attributs_xhtml.php"
 		]
-	}
+	},
+	"keywords" : [
+		"formulaire HTML validation"
+	]
 }
