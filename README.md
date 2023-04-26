@@ -1,70 +1,3 @@
-# jemdev\form
-Package de gestion de formulaires.
-
-Ce package permet de créer des formulaires HTML et de gérer la validation des données. Malgré le nombre de fichiers inclus dans ce package, la seule classe qui va nous intéresser est la classe jemdev\form, toutes les opérations passant par là.
-
-Notez par ailleurs que ce package ne gère absolument pas la mise en page des formulaires, cette tâche étant à prendre en charge dans les gabarits au moment de l'intégration. Ce package permet cependant de créer les différents champs qui seront inclus dans le code (X)HTML et permettra de définir des règles de validation pour chaque champ si nécessaire.
-Il sera en outre possible d'étendre le système de validation en ajoutant une classe utilisateur comportant des méthodes de validation spécifiques qui ne seraient pas couvertes par les méthodes natives du package.
-
-#### Note for English-speaking users: English is not my native language. If you are interested in the jemdem \ form package, if your native language is English and you understand French well, feel free to offer a translation that will always be appreciated.
-## Installation
-Via composer, ajouter simplement ceci dans le require de votre fichier composer.json:
-
-```
-"require" : {
-    "jemdev/form": "dev-master"
-}
-```
-
-
-## Mise en œuvre
-### Création de l'instance de formulaire
-La création d'une instance va initialiser le formulaire lui-même. Cependant, on ne créera pas la balise `<form>` qui sera automatiquement créée assortie des attributs appropriés. On précisera ces éléments lors de la création de l'instance.
-
-```php
-/**  
- * Création de l'instance de formulaire  
- */  
-$oForm = new jemdev\form('form_id', 'post');  
-```
-
-
-Notez ici qu'on précise uniquement l'identifiant du formulaire et la méthode utilisée. Ces paramètres sont tous facultatifs, cependant, il y aura automatiquement un identifiant d'inséré, *« form »* et par défaut la méthode sera *« get »*. On peut en outre préciser l'attribut action : par défaut, ce sera l'adresse de la page courante, mais on peut en indiquer une autre.
-On peut ensuite indiquer l'attribut *enctype* : par défaut, la valeur sera *« application/x-www-form-urlencoded »* mais sera automatiquement changée en *« multipart/form-data »* si un champ input de type file est créé. Il est recommandé de ne rien indiquer du tout.
-Enfin, on peut indiquer une ou plusieurs classes de validations spécifiques, ce point particulier sera vu plus loin.
-### Quel DOCTYPE
-Par défaut, les champs seront créés selon la syntaxe XHTML 1.0. Cependant, il est possible d'indiquer une autre DTD. Par exemple, pour construire un formulaire HTML, on assignera la valeur à une propriété publique de la classe jemdev\form :
-
-```php
-/* Changer le DOCTYPE */  
-$oForm->_sDoctype = 'HTML5';  
-```
-
-## Méthodes publiques du packages jemdev\form
-Ce package et inspiré à l'origine de *PEAR/HTML_QuickForm*. Cependant, à l'époque où la première version de jemdev\form a été conçu, l'idée de base consistait à disposer d'un outil en PHP5.
-
-Ce package est présenté aujourd'hui dans une version 2 intégrant les *namespaces* qui n'existaient pas encore en PHP. L'autre point essentiel à prendre en considération est que les packages que proposaient les frameworks majeurs du moment avaient la fâcheuse tendance à mélanger les genres, à savoir la gestion des données du formulaire et l'affichage de ce même formulaire.
-jemdev\form gère la création des champs et la validation des données saisies, mais l'aspect visuel du formulaire relève d'un processus à part qui n'est pas traité ici. Les seuls aspects visuels tiennent dans les balises (X)HTML des champs de formulaire, pas à leur intégration dans le formulaire lui-même.
-### Les méthodes de la classe jemdev\form\form
-Le principe de création d'un champ de formulaire a été aussi simplifié que possible. 
-
-```php
-/* Création de l'instance de formulaire */
-$oForm = new jemdev\form\form('identifiant_form', 'post');
-```
-
-Ce n'est pas plus compliqué que ça, le champ est prêt à être utilisé.
-
-Vous pouvez également simplifier la création de l'instance en utilisant « `use` » :
-
-```php
-<?php
-// ...
-use jemdev\form\form;
-
-//.. La création de l'instance devient alors :
-$oForm = new form('identifiant_form', 'post');
-```
 
 À partir de l'objet jemdev\form\form, on appelle simplement la méthode correspondant au type de champs qu'on souhaite créer.
 Par exemple, pour un champ de type *textarea* :
@@ -169,67 +102,67 @@ Il existe déjà des règles génériques disponibles pour valider les données 
 
 * *required* :
     * Vérifie qu'une valeur requise n'est pas vide.
-    * Utilisation : $objet->setRule('required', "message");
+    * Utilisation : `$objet->setRule('required', "message");`
 * *email* :
     * Vérifie la validité d'une adresse de courrier électronique.
-    * Utilisation : $objet->setRule('email', "message");
+    * Utilisation : `$objet->setRule('email', "message");`
 * *url* :
     * Vérifie la validité de la syntaxe d'une URL
-    * Utilisation : $objet->setRule('url', "message");
+    * Utilisation : `$objet->setRule('url', "message");`
 * *alpha* :
     * Vérifie la validité de la syntaxe d'une chaîne alphabétique. N'accepte que des caractères alphabétiques qui peuvent être accentués.
-    * Utilisation : $objet->setRule('alpha', "message");
+    * Utilisation : `$objet->setRule('alpha', "message");`
 * *word* :
     * Vérifie la validité de la syntaxe d'un ou plusieurs mots. Accepte des caractères alphabétiques plus guillemets, apostrophes, tirets et espaces.
-    * Utilisation : $objet->setRule('word', "message");
+    * Utilisation : `$objet->setRule('word', "message");`
 * *alnum* :
     * Vérifie la validité de la syntaxe d'une chaîne alphanumérique, accepte des mots et des chiffres ainsi que des caractères de ponctuation.
-    * Utilisation : $objet->setRule('alnum', "message");
+    * Utilisation : `$objet->setRule('alnum', "message");`
 * *num* :
     * Vérifie la validité de la syntaxe d'une chaîne de chiffres, n'accepte que des chiffres.
-    * Utilisation : $objet->setRule('num', "message");
+    * Utilisation : `$objet->setRule('num', "message");`
 * *float* :
   * Vérifie la validité de la syntaxe d'un nombre flottant. Accepte des chiffres avec ou sans décimales et une séparation sous la forme d'un point ou d'une virgule.
-  * Utilisation : $objet->setRule('float', "message");
+  * Utilisation : `$objet->setRule('float', "message");`
 * *minlength* :
   * Vérifie que la chaîne comporte au moins un certain nombre de caractères. On doit indiquer en troisième paramètre un entier correspondant au nombre minimum de caractères attendus.
-  * Utilisation : $objet->setRule('minlength', "message", 10);
+  * Utilisation : `$objet->setRule('minlength', "message", 10);`
 * *maxlength* :
   * Vérifie que la chaîne comporte au maximum un certain nombre de caractères. On doit indiquer en troisième paramètre un entier correspondant au nombre maximum de caractères attendus.
-  * Utilisation : $objet->setRule('maxlength', "message", 50);
+  * Utilisation : ` $objet->setRule('maxlength', "message", 50);`
 * *rangelength* :
   * Vérifie que la chaine comporte un nombre de caractères compris entre un minimum et un maximum donné. On doit indiquer en troisième paramètre tableau avec deux entiers correspondant au nombres minimum et maximum de caractères attendus.
-  * Utilisation : $objet->setRule('rangelength', "message", array(10, 50));
+  * Utilisation : `$objet->setRule('rangelength', "message", array(10, 50));`
 * *minval* :
   * Vérifie que la valeur est supérieure ou égale à une valeur minimum. On doit indiquer en troisième paramètre un entier ou flottant correspondant au nombre minimum attendu : cette règle pourra avantageusement être utilisée en parallèle avec la règle *num* ou *float*.
-  * Utilisation : $objet->setRule('minval', "message", 1);
+  * Utilisation : `$objet->setRule('minval', "message", 1);`
 * *maxval* :
   * Vérifie que la valeur est inférieure ou égale à une valeur maximum. On doit indiquer en troisième paramètre un entier ou flottant correspondant au nombre maximum attendu : cette règle pourra avantageusement être utilisée en parallèle avec la règle *num* ou *float*.
-  * Utilisation : $objet->setRule('maxval', "message", 12);
+  * Utilisation : `$objet->setRule('maxval', "message", 12);`
 * *rangeval* :
   * Vérifie que la valeur est comprise entre une valeur maximum et une valeur minimum. On doit indiquer en troisième paramètre un tableau de deux entiers ou flottants correspondant aux limites minimum et maximum attendu : cette règle pourra avantageusement être utilisée en parallèle avec la règle *num* ou *float*.
-  * Utilisation : $objet->setRule('rangeval', "message", array(1, 12));
+  * Utilisation : `$objet->setRule('rangeval', "message", array(1, 12));`
 * *inferieur* :
   * Vérifie que la valeur est strictement inférieure à une valeur maximum. On indique en troisième paramètre la valeur à laquelle le nombre saisi doit être strictement inférieur. Cette règle pourra être utilisée en parallèle avec la règle *num* ou *float*.
-  * Utilisation : $objet->setRule('inferieur', "message", 100);
+  * Utilisation : `$objet->setRule('inferieur', "message", 100);`
 * *superieur* :
   * Vérifie que la valeur est strictement supérieure à une valeur minimum. On indique en troisième paramètre la valeur à laquelle le nombre saisi doit être strictement supérieur. Cette règle pourra être utilisée en parallèle avec la règle *num* ou *float*.
-  * Utilisation : $objet->setRule('superieur', "message", 1);
+  * Utilisation : `$objet->setRule('superieur', "message", 1);`
 * *regex* :
   * Vérifie que la saisie correspond à une expression régulière définie. Règle fort pratique qui dispensera souvent d'écrire d'autres règles spécifiques. Si la saisie doit correspondre à un masque PCRE particulier, on indiquera ce masque en troisième paramètre.
-  * Utilisation : $objet->setRule('regex', "message", "#^[A-Z]{1}[0-9]{4}$#");
+  * Utilisation : `$objet->setRule('regex', "message", "#^[A-Z]{1}[0-9]{4}$#");`
 * *formatdateheure* :
   * Validation du format d'une date. On utilisera les mêmes règles de formats de date que pour la fonction PHP native *date()*, voir [la documentation][].
-  * Utilisation : $objet->setRule('formatdateheure', "message", 'd/m/Y');
+  * Utilisation : `$objet->setRule('formatdateheure', "message", 'd/m/Y');`
 * *validedate* :
   * Validation d'une date à partir d'un format donné. Le format de la date sera vérifié selon le troisième paramètre, mais l'existence de la date elle-même sera vérifié, interdisant par exemple de saisir un 30 février.
-  * Utilisation : $objet->setRule('validedate', "message", 'd/m/Y');
+  * Utilisation : `$objet->setRule('validedate', "message", 'd/m/Y');`
 * *comparer* :
   * Compare deux valeurs et retourne vrai si les deux chaines sont identiques. Utile lors de la création d'un mot de passe avec un champ de confirmation.
-  * Utilisation : $objet->setRule('comparer', "message", $valeur\_de\_controle);
+  * Utilisation : `$objet->setRule('comparer', "message", $valeur\_de\_controle);`
 * *differentDe* :
   * Vérifie que la valeur saisie est différente de l'argument. Par exemple, pour une liste de sélection dont le premier item affiche « Sélectionnez une valeur » et dont l'attribut *value* vaut *« -1 »*, on indique cette valeur comme ne pouvant être sélectionnée. Ça équivaut à rendre un choix obligatoire dans une liste.
-  * Utilisation : $objet->setRule('differentDe', "message", '-1');
+  * Utilisation : `$objet->setRule('differentDe', "message", '-1');`
 
 Notez que si un champ n'est pas défini comme requis mais que vous définissez une règles de validation sur le contenu, la validation ne retournera de message d'erreur que si une saisie a été effectuée. Par exemple, un champ où doit être saisie une date ne retournera d'erreur que si une date a été saisie incorrectement, mais la règle sera ignorée si le champ est resté vide et que la règle *required* n'a pas été définie.
 
@@ -256,7 +189,7 @@ $nom = $oForm->text('nom', 'nom')
 
 ### Définir des règles de validation personnalisées.
 Pour les cas où il ne sera pas possible de définir une expression régulière pour valider un champ donné, il reste possible d'ajouter des méthodes de validation supplémentaires au système de gestion des formulaires.
-Généralement, ce sera indispensable lorsqu'il s'agira de collecter des informations de contrôle dans une base de données par exemple ou d'une source externe quelconque.
+Généralement, ce sera indispensable lorsqu'il s'agira de collecter des informations de contrôle dans une base de données par exemple ou d'une source externe quelconque, ou encore si la donnée considérée doit correspondre à un schéma requérant un calcul de contrôle, par exemple pour vérifier la clé de contrôle d'un numéro de sécurité sociale.
 Pour ce faire, on définira une classe étendant jemdev\form\process\validation. Pour simplifier, voici un modèle qui pourra vous servir de base :
 
 ```php
@@ -346,7 +279,7 @@ Pour vous simplifier au maximum le travail, préparez un gabarit dont vous pourr
 </form>
 ```
 
-À ce stade, on a besoin que de la partie `fieldset`, n'utilisez pas la balise `FORM` qui sera de toutes façons intégrée automatiquement. On va mettre le contenu tel quel dans une variable PHP, ici en utilisant la syntaxe HEREDOC :
+À ce stade, on a besoin que de la partie `fieldset`, n'utilisez pas la balise `<from>` qui sera de toutes façons intégrée automatiquement. On va mettre le contenu tel quel dans une variable PHP, ici en utilisant la syntaxe HEREDOC :
 
 ```php
 <?php
@@ -413,3 +346,7 @@ Important : vous n'avez pas vu l'intégration des champs caché : normal, c'est 
 J'ai créé ce package aux environ de 2007 ou 2008 et je m'en sers quotidiennement. Cette version est une refonte intégrant les espaces de nom et *composer* pour simplifier son utilisation. Si besoin est, faites-moi part de vos observations et/ou questions, je m'efforcerai de trouver le temps nécessaire pour y donner suite.
 
 [la documentation]: http://php.net/date "Documentation PHP pour la fonction date"
+[CeCILL V2]: http://www.cecill.info/licences/Licence_CeCILL_V2-fr.html "Texte complet de la licence CeCILL version 2"
+[Message]: https://jem-dev.com/contacter-jem-developpement/ "Envoyer un message à Jean Molliné"
+[github.com/jemdev/form]: https://github.com/jemdev/form "Le package jemdev\form sur Github"
+[packagist.org/packages/jemdev/form]: https://packagist.org/packages/jemdev/form "La package jemdev\form sur Packagist"
