@@ -46,11 +46,11 @@ class option extends field
      * @param   Boolean $selected   Optionnel, définit si une valeur doit être sélectionnée par défaut.
      * @param   Array   $options    Paires attribut/valeur supplémentaires (Optionnel)
      */
-    public function addValue($value, $affiche, $selected = false, $selectParentName, $options = null)
+    public function addValue($value, $affiche, $selected = false, $selectParentName = null, $options = null)
     {
         $this->_value   = $value;
         $this->_affiche = $affiche;
-        if(false == $selected && (isset($this->_aSentDatas) && array_key_exists($selectParentName, $this->_aSentDatas) && $this->_aSentDatas[$selectParentName] == $value))
+        if(false == $selected && (isset($this->_aSentDatas) && !is_null($selectParentName) && array_key_exists($selectParentName, $this->_aSentDatas) && $this->_aSentDatas[$selectParentName] == $value))
         {
             $this->_aAttributs['selected'] = 'selected';
             $this->_valSelected == $value;
