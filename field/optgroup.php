@@ -45,7 +45,7 @@ class optgroup extends field
      * @param   Boolean $selected   Optionnel, option sélectionnée, par défaut false.
      * @return  Object
      */
-    public function addOption($valeur, $affiche, $selected = false, $parentName, $options = null)
+    public function addOption($valeur, $affiche, $selected, $parentName, $options = null)
     {
         if(!isset($this->_oOption))
         {
