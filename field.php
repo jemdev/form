@@ -440,8 +440,15 @@ abstract class field
         {
             $helper = $this->_oForm->_aClasseValidationExterne['classe'];
             $reflection = new \ReflectionClass($helper);
-            $props = $reflection->getProperty('aMethodesSupplementaires');
-            $aMethodesSupplementaires = $props->getValue('aMethodesSupplementaires');
+            $aProps = $reflection->getProperties();
+            $aMethodesSupplementaires = array();
+            foreach($aProps as $prop)
+            {
+                if($prop->name == 'aMethodesSupplementaires')
+                {
+                    $aMethodesSupplementaires = $prop->getValue();
+                }
+            }
             foreach($aMethodesSupplementaires as $methode)
             {
                 $this->methodesValidation[] = $methode;
