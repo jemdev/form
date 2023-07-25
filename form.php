@@ -121,7 +121,8 @@ class form
         'method'    => '_formMethod',
         'enctype'   => '_formEnctype',
         'contenu'   => '_contenu',
-        'charset'   => '_charset'
+        'charset'   => '_charset',
+        'class'     => '_class'
     );
     /**
      * Liste des messages d'erreurs retournées lors des levées d'exceptions.
@@ -352,6 +353,10 @@ class form
             $aAttrs[] = 'method="'. $this->_formMethod .'"';
             $aAttrs[] = 'enctype="'. $this->_formEnctype .'"';
             $aAttrs[] = 'accept-charset="'. $this->_formCharset .'"';
+            if(isset($this->_class))
+            {
+                $aAttrs[] = 'class="'. $this->_class .'"';
+            }
             $retour = implode(" ", $aAttrs);
             return $retour;
         }
