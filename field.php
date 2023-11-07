@@ -162,12 +162,12 @@ abstract class field
     /**
      * Établissement de la liste des balises valides selon le DOCTYPE utilisé.
      * 
-     * @param string $tag
+     * @param string|null $tag
      * @param string|null $type
      * 
      * @return void
      */
-    public function setListeAttributs(string $tag, ?string $type = null):void
+    public function setListeAttributs(?string $tag = null, ?string $type = null):void
     {
         if(!is_null($this->_tag))
         {
