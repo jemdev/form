@@ -414,10 +414,10 @@ abstract class field
      * Exemple : un champ de type texte qui a pour attribut name monchamp[1]
      * ou encore monchamp[1][2] (deux à 7 niveaux, index numériques ou chaines.)
      *
-     * @param   Object  $aField
+     * @param   string  $aField
      * @param   array   $aDatas
      */
-    public static function getValueFromArrayData(field $name, array $aDatas): string
+    public static function getValueFromArrayData(string $name, array $aDatas): string
     {
         $masque = "#^[^[]+(\[[^]]+\])+#";
         if(preg_match($masque, $name))
