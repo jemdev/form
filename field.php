@@ -28,7 +28,7 @@ abstract class field
      * @var jemdev\form\tags\attributesInterface
      */
     private $_oAttributes;
-    private $_aDoctypes     = array('HTML','XHTML','HTML5');
+    private $_aDoctypes     = ['HTML','XHTML','HTML5'];
     /**
      * Sorte de balise html
      *
@@ -61,7 +61,7 @@ abstract class field
      *
      * @var array
      */
-    protected $_aAttributs  = array();
+    protected $_aAttributs  = [];
     /**
      * Label du champ de formulaire
      *
@@ -97,13 +97,13 @@ abstract class field
      *
      * @var array
      */
-    protected $_aSentDatas  = array();
+    protected $_aSentDatas  = [];
     /**
      * Stockage des règles définies pour le champ en cours de construction
      *
      * @var array
      */
-    protected $_aRules      = array();
+    protected $_aRules      = [];
     /**
      * Indique si le champ a déjà été défini comme obligatoire.
      *
@@ -358,13 +358,13 @@ abstract class field
      *
      * @param   string  $rule       Nom de la règle à appliquer
      * @param   string  $msg        Message à afficher si règle non vérifiée.
-     * @param   array   $val        Valeur à vérifier (Optionnel selon la règle à appliquer)
+     * @param   mixed   $val        Valeur à vérifier (Optionnel selon la règle à appliquer)
      * @see     jemdev\form\process\validation
      * 
      * @TODO    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
      *          de tableaux que de valeurs scalaires.
      */
-    public function setRule(string $rule, string $msg, ?array $val = null): field
+    public function setRule(string $rule, string $msg, ?mixed $val = null): field
     {
         if($rule == 'required' || $rule == 'differentDe')
         {
@@ -375,7 +375,7 @@ abstract class field
         {
             if(in_array($rule, $this->methodesValidation))
             {
-                $this->_oForm->setRegleValidation($this->_aAttributs['name'], array($rule), $msg);
+                $this->_oForm->setRegleValidation($this->_aAttributs['name'], [$rule], $msg);
             }
             else
             {
@@ -390,11 +390,11 @@ abstract class field
              */
             if(is_array($val))
             {
-                $this->_oForm->setRegleValidation($this->_aAttributs['name'], array($rule, $val), $msg);
+                $this->_oForm->setRegleValidation($this->_aAttributs['name'], [$rule, $val], $msg);
             }
             else
             {
-                $this->_oForm->setRegleValidation($this->_aAttributs['name'], array($rule, $val), $msg);
+                $this->_oForm->setRegleValidation($this->_aAttributs['name'], [$rule, $val], $msg);
             }
         }
         $strRequis = ' <span class="elementrequis">(*)</span>';
@@ -452,7 +452,7 @@ abstract class field
             $helper = $this->_oForm->_aClasseValidationExterne['classe'];
             $reflection = new \ReflectionClass($helper);
             $aProps = $reflection->getProperties();
-            $aMethodesSupplementaires = array();
+            $aMethodesSupplementaires = [];
             foreach($aProps as $prop)
             {
                 if($prop->name == 'aMethodesSupplementaires')
