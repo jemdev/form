@@ -364,7 +364,7 @@ abstract class field
      * @TODO    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
      *          de tableaux que de valeurs scalaires.
      */
-    public function setRule(string $rule, string $msg, ?mixed $val = null): field
+    public function setRule(string $rule, string $msg, mixed $val = null): field
     {
         if($rule == 'required' || $rule == 'differentDe')
         {
