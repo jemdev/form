@@ -245,6 +245,10 @@ class validation
                 $sRegle = $aRegle[0];
                 if(in_array($sRegle, self::$methodesValidation))
                 {
+                    if(empty($this->_aDatas))
+                    {
+                        $this->_aDatas = [];
+                    }
                     $nbp = count($this->_aRules[$champ][$i][0]);
                     /**
                      * Si la donnée existe :
