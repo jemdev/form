@@ -400,9 +400,9 @@ class form
      *
      * @param   string  $prop
      * @param   string  $val
-     * @return  Object
+     * @return  form
      */
-    public function __set(string $prop, string $val): form
+    public function __set(string $prop, string $val)
     {
         if(in_array($prop, $this->_aProps))
         {
