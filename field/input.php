@@ -45,6 +45,10 @@ abstract class input extends field
 
     public function __toString(): string
     {
+        if(empty($this->_aSentDatas))
+        {
+            $this->_aSentDatas = [];
+        }
         $getVal = parent::getValueFromArrayData($this->_aAttributs['name'], $this->_aSentDatas);
         $valeur = (!empty($this->_aAttributs['value']))
             ? $this->_aAttributs['value']
