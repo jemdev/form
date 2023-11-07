@@ -3,7 +3,7 @@ namespace jemdev\form\field\input;
 use jemdev\form\form;
 use jemdev\form\field\input;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -15,9 +15,9 @@ use jemdev\form\field\input;
  * Construction d'une balise input visible, donc n'importe lequel sauf
  * le type hidden.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class visible extends input
 {
@@ -28,22 +28,22 @@ class visible extends input
      * paramètres envoyés individuellement arrivent ici sous la forme
      * d'un tableau indexé.
      * Les paramètres réellement attendus sont les attributs de base :
-     * \@param String $props[0] = id    Identifiant du champ
-     * \@param String $props[1] = name  Attribut name du champ (Facultatif, sera remplacé par
+     * \@param string $props[0] = id    Identifiant du champ
+     * \@param string $props[1] = name  Attribut name du champ (Facultatif, sera remplacé par
      *                                  la valeur de l'id si absent)
-     * \@param String $props[2] = value Valeur du champ (Facultatif)
-     * \@param String $props[3] = label Label pour le champ si nécessaire (Facultatif)
+     * \@param string $props[2] = value Valeur du champ (Facultatif)
+     * \@param string $props[3] = label Label pour le champ si nécessaire (Facultatif)
      *
      * D'autres attributs sont possibles sous réserve qu'ils soient définis
      * dans le constructeur ou les classes parentes. Par exemple, l'attribut
      * style est générique et peut être alimenté avec la méthode setAttribute().
      *
      * @param   string  $type       Type de champ input, ex. text, submit, etc...
-     * @param   Array   $props      Voir ci-dessus
-     * @param   String  $doctype    Standard à utiliser (HTML ou XHTML par défaut)
+     * @param   array   $props      Voir ci-dessus
+     * @param   string  $doctype    Standard à utiliser (HTML ou XHTML par défaut)
      * @param   Object  $oForm      Instance du formulaire en cours de construction
      */
-    public function __construct($type, $props, $doctype, form $oForm)
+    public function __construct(string $type, array $props, string $doctype, form $oForm)
     {
         /**
          * Récupération des paramètres.

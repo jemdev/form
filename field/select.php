@@ -4,7 +4,7 @@ use jemdev\form\form;
 use jemdev\form\field;
 use jemdev\form\field\optgroup;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -15,9 +15,9 @@ use jemdev\form\field\optgroup;
 /**
  * Création d'une balise select de liste de sélection.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class select extends field
 {
@@ -42,7 +42,7 @@ class select extends field
     /**
      * Liste des groupes d'options
      *
-     * @var Array
+     * @var array
      */
     private $_aOptGroups = array();
     /**
@@ -57,16 +57,16 @@ class select extends field
      *
      * Définit une liste de sélection.
      * Contenu du paramètre $props :
-     * \@param String $props[0] = id    Identifiant du champ
-     * \@param String $props[1] = name  Attribut name du champ (Facultatif, sera remplacé par
+     * \@param string $props[0] = id    Identifiant du champ
+     * \@param string $props[1] = name  Attribut name du champ (Facultatif, sera remplacé par
      *                                  la valeur de l'id si absent)
-     * \@param String $props[2] = value Valeur du champ (Facultatif)
-     * \@param String $props[3] = label Label pour le champ si nécessaire (Facultatif)
+     * \@param string $props[2] = value Valeur du champ (Facultatif)
+     * \@param string $props[3] = label Label pour le champ si nécessaire (Facultatif)
      *
-     * @param   Array   $props  Voir ci-dessus
+     * @param   array   $props  Voir ci-dessus
      * @param   Object  $oForm  Instance du formulaire en cours de construction.
      */
-    public function __construct($props, form $oForm)
+    public function __construct(array $props, form $oForm)
     {
         parent::__construct($oForm);
         $this->_tag                 = 'select';
@@ -81,12 +81,14 @@ class select extends field
     /**
      * Ajoute un item dans la liste de sélection.
      *
-     * @param   String  $valeur     Contenu de l'attribut value
-     * @param   String  $affiche    Valeur affichée dans la liste de sélection
-     * @param   Boolean $selected   Optionnel, option sélectionnée, par défaut : false.
-     * @return  Object
+     * @param   string      $valeur     Contenu de l'attribut value
+     * @param   string      $affiche    Valeur affichée dans la liste de sélection
+     * @param   bool        $selected   Optionnel, option sélectionnée, par défaut : false.
+     * @param   array|null  $options
+     * 
+     * @return select
      */
-    public function addOption($valeur, $affiche, $selected = false, $options = null)
+    public function addOption(string $valeur, string $affiche, bool $selected = false, ?array $options = null): select
     {
         if($this->_oOptgroup instanceof optgroup )
         {
@@ -104,7 +106,7 @@ class select extends field
         return $this;
     }
 
-    public function addGroup($label)
+    public function addGroup(string $label): select
     {
         $this->_oOptgroup = new optgroup($label, $this->_oForm);
         $this->_aOptGroups[] = $this->_oOptgroup;
@@ -117,12 +119,12 @@ class select extends field
      *
      * @return Int
      */
-    public function getNbOptions()
+    public function getNbOptions(): int
     {
         return($this->_nbOptions);
     }
 
-    public function getSelected()
+    public function getSelected(): string
     {
         return $this->_oOption->getSelected();
     }
@@ -130,9 +132,9 @@ class select extends field
     /**
      * Sortie HTML
      *
-     * @return String
+     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $sListeOptions  = sprintf('%s', $this->_oOption);
         $sListeGroupes = '';

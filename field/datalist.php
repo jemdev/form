@@ -25,7 +25,7 @@ class datalist extends field
     /**
      * Constructeur.
      */
-    function __construct($props, form $oForm)
+    function __construct(array $props, form $oForm)
     {
         $this->_tag                 = 'datalist';
         $this->_type                = 'datalist';
@@ -40,11 +40,11 @@ class datalist extends field
     /**
      * Ajoute un item dans la liste de sélection.
      *
-     * @param   String  $valeur     Contenu de l'attribut value
-     * @param   String  $affiche    Valeur affichée dans la liste de sélection
+     * @param   string  $valeur     Contenu de l'attribut value
+     * @param   string  $affiche    Valeur affichée dans la liste de sélection
      * @return  Object
      */
-    public function addOption($valeur, $affiche, $selected = false, $options = null)
+    public function addOption(string $valeur, string $affiche, bool $selected = false, ?array $options = null): datalist
     {
         if(!isset($this->_oOption))
         {
@@ -55,7 +55,7 @@ class datalist extends field
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $sListeOptions  = sprintf('%s', $this->_oOption);
         $sListeOpt      = $sListeOptions;

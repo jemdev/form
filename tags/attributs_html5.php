@@ -13,9 +13,9 @@ use jemdev\form\form;
 /**
  * Gestion des attributs html5 de balise d'éléments de formulaire.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
+ * @author      Jean Molliné <jmolline@jem-dev.com>
  * @package     jemdev
- * @subpackage  Form
+ * @subpackage  form
  * @version     0.1 alpha
  */
 class attributs_html5 implements attributesInterface
@@ -54,7 +54,7 @@ class attributs_html5 implements attributesInterface
     /**
      * Liste des attributs html de balise des éléments composant un formulaire selon le standard HTML5
      *
-     * @var Array
+     * @var array
      */
     private static $_aAttrs = array(
         'global'    => array(
@@ -230,10 +230,10 @@ class attributs_html5 implements attributesInterface
      *
      * La méthode est statique, on a en effet nul besoin d'un objet
      *
-     * @param   String  $balise     Nom de la balise
-     * @return  Array
+     * @param   string  $balise     Nom de la balise
+     * @return  array
      */
-    public static function getAttrParBalise($balise)
+    public static function getAttrParBalise(string $balise): array
     {
         $aAttrs = array();
         switch ($balise)

@@ -12,10 +12,10 @@ interface attributesInterface
      *
      * La méthode est statique, on a en effet nul besoin d'un objet
      *
-     * @param   String  $balise     Nom de la balise
-     * @return  Array
+     * @param   string  $balise     Nom de la balise
+     * @return  array
      */
-    public static function getAttrParBalise($balise);
+    public static function getAttrParBalise(string $balise): array;
 }
 
 ?>

@@ -7,15 +7,15 @@ use jemdev\form\form;
  * que vous souhaitez. Vous devrez néanmoins respecter les termes
  * de la licence CeCILL dont le fichier est joint à cette librairie.
  *
- * @package     mje
+ * @package     jemdev
  * @see http://www.cecill.info/licences/Licence_CeCILL_V2-fr.html
  */
 /**
  * Gestion des attributs xhtml de balise d'éléments de formulaire.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class attributs_xhtml implements attributesInterface
 {
@@ -39,7 +39,7 @@ class attributs_xhtml implements attributesInterface
     /**
      * Liste des attributs xhtml de balise des éléments composant un formulaire selon le standard XHTML
      *
-     * @var Array
+     * @var array
      */
     private static $_aAttrs = array(
         'core'      => array(
@@ -146,10 +146,10 @@ class attributs_xhtml implements attributesInterface
      *
      * La méthode est statique, on a en effet nul besoin d'un objet
      *
-     * @param   String  $balise     Nom de la balise
-     * @return  Array
+     * @param   string  $balise     Nom de la balise
+     * @return  array
      */
-    public static function getAttrParBalise($balise)
+    public static function getAttrParBalise(string $balise): array
     {
         $aAttrs = array();
         switch ($balise)

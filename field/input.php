@@ -3,7 +3,7 @@ namespace jemdev\form\field;
 use jemdev\form\form;
 use jemdev\form\field;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -14,16 +14,16 @@ use jemdev\form\field;
 /**
  * Classe abstraite de création de champs de formulaire input.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 abstract class input extends field
 {
     /**
      * Attributs de la balise.
      *
-     * @var Array
+     * @var array
      */
     protected $_aAttributs = array(
         'id'    => null,
@@ -36,14 +36,14 @@ abstract class input extends field
      * Constructeur.
      *
      */
-    public function __construct($id, $type, form $oForm)
+    public function __construct(string $id, string $type, form $oForm)
     {
         parent::__construct($oForm);
         $this->_tag = 'input';
         $this->_type = $type;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $getVal = parent::getValueFromArrayData($this->_aAttributs['name'], $this->_aSentDatas);
         $valeur = (!empty($this->_aAttributs['value']))

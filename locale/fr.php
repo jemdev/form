@@ -1,7 +1,7 @@
 <?php
 namespace jemdev\form\locale;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications

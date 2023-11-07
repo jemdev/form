@@ -3,7 +3,7 @@ namespace jemdev\form\field;
 use jemdev\form\form;
 use jemdev\form\field;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -14,9 +14,9 @@ use jemdev\form\field;
 /**
  * Création d'une balise textarea
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class textarea extends field
 {
@@ -33,15 +33,15 @@ class textarea extends field
      * dans le constructeur ou les classes parentes. Par exemple, l'attribut
      * style est générique et peut être alimenté avec la méthode setAttribute().
      *
-     * @param Array  $props             Voir détail ci-dessous
-     * @param String $props[0] = id     Identifiant du champ
-     * @param String $props[1] = name   Attribut name du champ (Facultatif, sera remplacé par
+     * @param array  $props             Voir détail ci-dessous
+     * @param string $props[0] = id     Identifiant du champ
+     * @param string $props[1] = name   Attribut name du champ (Facultatif, sera remplacé par
      *                                  la valeur de l'id si absent)
-     * @param String $props[2] = value  Valeur du champ (Facultatif)
-     * @param String $props[3] = label  Label pour le champ si nécessaire (Facultatif)
-     * @param Object $oForm             Instance du formulaire en cours de construction
+     * @param string $props[2] = value  Valeur du champ (Facultatif)
+     * @param string $props[3] = label  Label pour le champ si nécessaire (Facultatif)
+     * @param form   $oForm             Instance du formulaire en cours de construction
      */
-    public function __construct($props, form $oForm)
+    public function __construct(array $props, form $oForm)
     {
         parent::__construct($oForm);
         $this->_tag = 'textarea';
@@ -59,17 +59,17 @@ class textarea extends field
     /**
      * Pré-remplit le textarea en ajoutant une valeur dans la zone de saisie.
      *
-     * @param   String  $contenu
-     * @return  Object
+     * @param   string  $contenu
+     * @return  string
      */
-    public function setContenu($contenu)
+    public function setContenu(string $contenu): textarea
     {
         $this->_contenu = $contenu;
         $this->_valChamp = $contenu;
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if(isset($this->_aSentDatas[$this->_aAttributs['name']]))
         {

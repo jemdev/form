@@ -4,7 +4,7 @@ use jemdev\form\form;
 use jemdev\form\field;
 use jemdev\form\field\option;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -15,8 +15,8 @@ use jemdev\form\field\option;
 /**
  * Groupe dans une liste de sélection.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
  * @subpackage  form
  */
 class optgroup extends field
@@ -26,8 +26,10 @@ class optgroup extends field
     /**
      * Constructeur.
      *
+     * @param string $label
+     * @param form $oForm
      */
-    public function __construct($label, form $oForm)
+    public function __construct(string $label, form $oForm)
     {
         parent::__construct($oForm);
         $this->_aAttributs['label'] = $label;
@@ -40,12 +42,12 @@ class optgroup extends field
     /**
      * Ajoute un item dans la liste de sélection.
      *
-     * @param   String  $valeur     Contenu de l'attribut value
-     * @param   String  $affiche    Valeur affichée dans la liste de sélection
-     * @param   Boolean $selected   Optionnel, option sélectionnée, par défaut false.
+     * @param   string  $valeur     Contenu de l'attribut value
+     * @param   string  $affiche    Valeur affichée dans la liste de sélection
+     * @param   bool $selected   Optionnel, option sélectionnée, par défaut false.
      * @return  Object
      */
-    public function addOption($valeur, $affiche, $selected, $parentName, $options = null)
+    public function addOption(string $valeur, string $affiche, bool $selected, string $parentName, ?array $options = null): field
     {
         if(!isset($this->_oOption))
         {
@@ -61,17 +63,17 @@ class optgroup extends field
      *
      * @return Int
      */
-    public function getNbOptions()
+    public function getNbOptions(): int
     {
         return($this->_nbOptions);
     }
 
-    public function getSelected()
+    public function getSelected(): string
     {
         return $this->_oOption->getSelected();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $sListeOptions = sprintf('%s', $this->_oOption);
         if(!empty($sListeOptions))

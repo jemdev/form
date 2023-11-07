@@ -15,7 +15,7 @@ namespace jemdev\form;
  * depuis le formulaire et alimenter la propriété de l'instance de formulaire
  * avec les valeurs saisies et/ou sélectionnées par l'utilisateur.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
+ * @author      Jean Molliné <jmolline@jem-dev.com>
  * @package     jemdev
  * @subpackage  form
  */

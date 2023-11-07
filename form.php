@@ -46,7 +46,7 @@ $l  = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && in_array($_SERVER['HTTP_ACCEPT
  * Néanmoins, lors de la définition d'une règle de validation, on ne met pas ce
  * préfixe et on mentionnera ainsi 'required' et non '_required'.<br />
  *
- * @author      Jean Molliné <jmolline@gmail.com>
+ * @author      Jean Molliné <jmolline@jem-dev.com>
  * @package     jemdev
  * @subpackage  form
  * @version     2.0 Ré-écriture du package intégrant les NAMESPACES
@@ -63,20 +63,20 @@ class form
      * si les balises dites «vides» doivent être fermées (<... />)
      * selon la syntaxe XML ou non (<...>) selon la syntaxe HTML4
      *
-     * @var String
+     * @var string
      */
     private $_sDoctype      = 'HTML5';
     private $_aValidDoctypes = array('HTML','HTML5','XHTML');
     /**
      * Identifiant du formulaire (attribut id)
      *
-     * @var String
+     * @var string
      */
     protected $_formId;
     /**
      * Url de traitement du formulaire.
      *
-     * @var String
+     * @var string
      */
     private $_formAction;
     /**
@@ -84,36 +84,36 @@ class form
      * Par défaut, vaudra la même valeur que la valeur par
      * défaut du standard (X)HTML à savoir get.
      *
-     * @var String
+     * @var string
      */
     protected $_formMethod;
     /**
      * Paramètre enctype de la balise form.
      *
-     * @var String
+     * @var string
      */
     private $_formEnctype;
     /**
      * Paramètre d'encodage des données.
-     * var String
+     * var string
      */
     private $_formCharset = 'utf8';
     /**
      * Liste des champs du formulaire.
      *
-     * @var Array
+     * @var array
      */
     private $_aElements     = array();
     /**
      * Contenu html qui sera inséré entre les balises <form>
      *
-     * @var String
+     * @var string
      */
     private $_contenu;
     /**
      * Propriétés de la classe accessible via les méthodes magiques __get() et __set()
      *
-     * @var Array
+     * @var array
      */
     private $_aProps = array(
         'doctype'   => '_sDoctype',
@@ -127,13 +127,13 @@ class form
     /**
      * Liste des messages d'erreurs retournées lors des levées d'exceptions.
      *
-     * @var Array
+     * @var array
      */
     private $_aExceptionErreurs;
     /**
      * Liste des messages génériques d'erreurs retournées lors de la validation.
      *
-     * @var Array
+     * @var array
      */
     private $_aValidationErreurs;
     /**
@@ -151,19 +151,19 @@ class form
      * On stocke les champs cachés qui seront affichés groupés
      * en début de formulaire.
      *
-     * @var Array
+     * @var array
      */
     private $_aHiddens;
     /**
      * Les des messages pour les erreurs relevées lors de la validation.
      *
-     * @var Array
+     * @var array
      */
     private $_aErreursValidation;
     /**
      * Liste des règles de validation.
      *
-     * @var Array
+     * @var array
      */
     private $_aReglesValidation;
     /**
@@ -172,12 +172,12 @@ class form
      * - Le chemin absolu vers le fichier;
      * - le nom de la classe de validation.
      *
-     * @var Array
+     * @var array
      */
     private $_aClasseValidationExterne  = array();
     /**
      * Indique que le formulaire a fait l'objet d'un envoi.
-     * @var Boolean
+     * @var bool
      */
     public  $bFormEnvoye = false;
     /**
@@ -185,12 +185,12 @@ class form
      * Indique si le formulaire soumis a été validé avec succès ou
      * si des erreurs ont été relevées.
      *
-     * @var Boolean
+     * @var bool
      */
     public  $bFormValide = false;
     /**
      * Données du formulaire récupérables après validation.
-     * @var Array
+     * @var array
      */
     public  $aDatas = array();
     /**
@@ -210,12 +210,12 @@ class form
      * code HTML de formulaire non conforme et invalide.
      * Cette option ne fonctionne pour l'instant avec TRUE que pour XHTML
      *
-     * @var boolean
+     * @var bool
      */
     public $bStrict = false;
     /**
      * Liste des méthodes de validation disponibles.
-     * @var Array
+     * @var array
      */
     private $_aMethodesSupp;
     private $_bSetBlocErreursJS = false;
@@ -224,14 +224,14 @@ class form
     /**
      * Constructeur.
      *
-     * @param   String  $id                 Identifiant de la balise <form>
-     * @param   String  $method             Méthode (post ou get, optionnel, défaut get)
-     * @param   String  $action             URL de traitement, optionnel, par défaut la page elle même.
-     * @param   String  $enctype            Attribut enctype de la balise <form>, défaut « application/x-www-form-urlencoded »
-     * @param   Array   $aClassValidExterne Si des règles spécifiques de validation ont été définies,
+     * @param   string  $id                 Identifiant de la balise <form>
+     * @param   string  $method             Méthode (post ou get, optionnel, défaut get)
+     * @param   string  $action             URL de traitement, optionnel, par défaut la page elle même.
+     * @param   string  $enctype            Attribut enctype de la balise <form>, défaut « application/x-www-form-urlencoded »
+     * @param   array   $aClassValidExterne Si des règles spécifiques de validation ont été définies,
      *                                      chemin et nom de la classe à utiliser.
      */
-    public function __construct($id = null, $method = 'get', $action = null, $enctype = null, $aClassValidExterne = null)
+    public function __construct(string $id = null, string $method = 'get', ?string $action = null, ?string $enctype = null, ?array $aClassValidExterne = null)
     {
         $this->_aHiddens    = array();
         $this->_formId      = (!is_null($id)) ? $id : 'form1';
@@ -278,11 +278,11 @@ class form
      * Si la valeur de l'attribut name n'est pas fournie, c'est la même valeur
      * que celle de l'attribut id qui sera utilisée, celle-ci est la seule obligatoire.
      *
-     * @param   String  $methode
-     * @param   Array   $params
+     * @param   string  $methode
+     * @param   array   $params
      * @return  field
      */
-    public function __call($methode, $params): field
+    public function __call(string $methode, array $params): field
     {
         if(in_array($methode, $this->_aValidTags['input']))
         {
@@ -336,10 +336,10 @@ class form
     /**
      * Récupération de la valeur d'une propriété de l'instance.
      *
-     * @param   String $id
-     * @return  String
+     * @param   string $id
+     * @return  mixed
      */
-    public function __get($id)
+    public function __get(string $id): mixed
     {
         if($id == 'attr')
         {
@@ -398,11 +398,11 @@ class form
     /**
      * Méthode magique d'initialisation de propriété de classe.
      *
-     * @param   String  $prop
-     * @param   String  $val
+     * @param   string  $prop
+     * @param   string  $val
      * @return  Object
      */
-    public function __set($prop, $val)
+    public function __set(string $prop, string $val): form
     {
         if(in_array($prop, $this->_aProps))
         {
@@ -445,10 +445,12 @@ class form
     /**
      * Ajout d'un champ caché dans le formulaire.
      *
-     * @param String    $index  Identifiant du champ
-     * @param String    $val    Valeur du champ.
+     * @param string    $index  Identifiant du champ
+     * @param string    $val    Valeur du champ.
+     * 
+     * @return void
      */
-    public function setHidden($index, $val = '')
+    public function setHidden(string $index, string $val = ''): void
     {
         $this->_aHiddens[$index] = $val;
     }
@@ -456,11 +458,11 @@ class form
     /**
      * Ajout ou modification d'une règle de validation pour un champ donné.
      *
-     * @param   String  $nameChamp
-     * @param   Array   $aRegles
+     * @param   string  $nameChamp
+     * @param   array   $aRegles
      * @param   srting  $msg
      */
-    public function setRegleValidation($nameChamp, $aRegles, $msg)
+    public function setRegleValidation(string $nameChamp, array $aRegles, string $msg): form
     {
         if(!empty($nameChamp) && !is_object($nameChamp))
         {
@@ -471,14 +473,14 @@ class form
 
     /**
      * Ajoute un bloc container pour les erreurs de validation JavaScript.
-     * @param Boolean $afficher
+     * @param bool $afficher
      */
-    public function setBlocValidJS($afficher = true)
+    public function setBlocValidJS(bool $afficher = true): void
     {
         $this->_bSetBlocErreursJS = (is_bool($afficher)) ? $afficher : true;
     }
 
-    private function _getValidation()
+    private function _getValidation(): void
     {
         $retour = array();
         $m      = strtoupper($this->_formMethod);
@@ -548,12 +550,13 @@ class form
      * Ce tableau pourra être utilisé ultérieurement.
      * Actuellement ne sert à rien.
      *
-     * @param   String  $type
-     * @param   String  $id
+     * @param   string  $type
+     * @param   string  $id
      * @param   Object  $objet
-     * @return  Object
+     * 
+     * @return  form
      */
-    private function _addElement($type, $id, $objet)
+    private function _addElement(string $type, string $id, object $objet): form
     {
         $this->_aElements[$id] = array(
             'objet' => $objet,
@@ -566,8 +569,10 @@ class form
     /**
      * Ajout d'un champ caché avec une clé d'identification unique propre
      * à ce formulaire.
+     * 
+     * @return void
      */
-    private function _addCleSecurite()
+    private function _addCleSecurite(): void
     {
         $sCle = $this->_oCle->getCleUnique();
         $oSec = $this->hidden('cleform_'. $this->_formId, 'cleform_'. $this->_formId, $sCle);
@@ -580,9 +585,9 @@ class form
      * du formulaire par un robot, la validations sera bloquée et
      * rien ne sera considéré comme fiable.
      *
-     * @return Boolean
+     * @return Bool
      */
-    private function _validerCle()
+    private function _validerCle(): bool
     {
         /**
          * On envoie par défaut un retour à true : si en effet c'est le
@@ -598,7 +603,12 @@ class form
         return $retour;
     }
 
-    private function _init($aClassValidExterne = null)
+    /**
+     * @param array|null $aClassValidExterne
+     * 
+     * @return void
+     */
+    private function _init(array $aClassValidExterne = null): void
     {
         $this->_setValidTags();
         $this->_aErreursValidation = array();
@@ -639,10 +649,10 @@ class form
      * Cette mééthode récursive va faire le tour de toutes les informations qui ont été
      * envoyées et les traiter.
      *
-     * @param   Array $datas
-     * @return  Array
+     * @param   array $datas
+     * @return  array
      */
-    protected function _setValeursNumeriques($datas)
+    protected function _setValeursNumeriques(array $datas): array
     {
         if(is_array($datas))
         {
@@ -665,19 +675,30 @@ class form
      * Définit si on doit valider les données du formulaire et
      * surtout si on doit ou non masquer le formulaire dans le cas
      * où les données seraient valides.
-     * @param Boolean $valider
+     * 
+     * @param bool $valider
+     * 
+     * @return void
      */
-    public function validerForm($valider = true)
+    public function validerForm(bool $valider = true): void
     {
         $this->_bFormValidation = $valider;
     }
 
-    public function addErreur($erreur)
+    /**
+     * @param mixed $erreur
+     * 
+     * @return void
+     */
+    public function addErreur(mixed $erreur): void
     {
         $this->_aErreursValidation[] = $erreur;
     }
 
-    private function _setLang()
+    /**
+     * @return void
+     */
+    private function _setLang(): void
     {
         $loc = (defined('JEMDEVFORM_LOCALE_LANG')) ? JEMDEVFORM_LOCALE_LANG : 'fr';
         include(realpath(__DIR__ . DIRECTORY_SEPARATOR .'locale'. DIRECTORY_SEPARATOR .'lang.php'));
@@ -686,7 +707,10 @@ class form
         $this->_aValidationErreurs = $oLang::$msgs_erreur_validation;
     }
 
-    private function _setValidTags()
+    /**
+     * @return void
+     */
+    private function _setValidTags(): void
     {
         if(is_null($this->_sDoctype))
         {
@@ -709,9 +733,9 @@ class form
     /**
      * Préparation de la chaine complète du formulaire HTML.
      *
-     * @return String
+     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $retour = '';
         /**

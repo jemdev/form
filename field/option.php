@@ -3,7 +3,7 @@ namespace jemdev\form\field;
 use jemdev\form\form;
 use jemdev\form\field;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -14,9 +14,9 @@ use jemdev\form\field;
 /**
  * Création d'une balise option pour une liste de sélection
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class option extends field
 {
@@ -41,12 +41,15 @@ class option extends field
     /**
      * Ajout d'un item dans la liste de sélection.
      *
-     * @param   String  $value      Valeur de l'attribut value
-     * @param   String  $affiche    Valeur affichée dans la liste
-     * @param   Boolean $selected   Optionnel, définit si une valeur doit être sélectionnée par défaut.
-     * @param   Array   $options    Paires attribut/valeur supplémentaires (Optionnel)
+     * @param   string  $value      Valeur de l'attribut value
+     * @param   string  $affiche    Valeur affichée dans la liste
+     * @param   bool $selected   Optionnel, définit si une valeur doit être sélectionnée par défaut.
+     * @param   array|null $selectParentName
+     * @param   array   $options    Paires attribut/valeur supplémentaires (Optionnel)
+     * 
+     * @return void
      */
-    public function addValue($value, $affiche, $selected = false, $selectParentName = null, $options = null)
+    public function addValue($value, $affiche, $selected = false, $selectParentName = null, ?array $options = null): void
     {
         $this->_value   = $value;
         $this->_affiche = $affiche;
@@ -83,12 +86,12 @@ class option extends field
         $this->_listeOptions[] = $sOption;
     }
 
-    public function getSelected()
+    public function getSelected(): string
     {
         return $this->_valSelected;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $sListeOptions = implode("\n", $this->_listeOptions);
         return $sListeOptions;

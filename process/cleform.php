@@ -1,7 +1,7 @@
 <?php
 namespace jemdev\form\process;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -13,9 +13,9 @@ namespace jemdev\form\process;
  * Classe de gestion d'une clé de sécurité pour créer
  * ou valider une clé d'identification unique pour un formulaire.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class cleform
 {
@@ -37,7 +37,7 @@ class cleform
         }
     }
 
-    public function  getCleUnique()
+    public function getCleUnique(): string
     {
         /**
          * on génère la clé et on l’enregistre dans la classe
@@ -56,15 +56,16 @@ class cleform
     /**
      * Validation de la clé d'identification du formulaire.
      *
-     * @param   String  $clePostee
-     * @return  Boolean
+     * @param   string  $clePostee
+     * @return  bool
      */
-    public function validationCle($clePostee)
+    public function validationCle(string $clePostee): bool
     {
         $retour = (sha1($clePostee) == $this->_ancienneCle) ? true : false;
         return $retour;
     }
-    private function _genereCle()
+
+    private function _genereCle(): void
     {
         /**
          * Récupération de L'Adresse IP de l'utilisateur.

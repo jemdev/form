@@ -3,7 +3,7 @@ namespace jemdev\form\field\input;
 use jemdev\form\field\input;
 use jemdev\form\form;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -14,9 +14,9 @@ use jemdev\form\form;
 /**
  * Construction d'une balise input de type hidden.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 class hidden extends input
 {
@@ -28,20 +28,20 @@ class hidden extends input
      * paramètres envoyés individuellement arrivent ici sous la forme
      * d'un tableau indexé.
      * Les paramètres réellement attendus sont les attributs de base :
-     * @param String $id        Identifiant du champ
-     * @param String $name      Attribut name du champ (Facultatif, sera remplacé par la valeur de l'id si absent)
-     * @param String $value     Valeur du champ (Facultatif)
-     * @param String $label     Label pour le champ si nécessaire (Facultatif)
+     * @param string $id        Identifiant du champ
+     * @param string $name      Attribut name du champ (Facultatif, sera remplacé par la valeur de l'id si absent)
+     * @param string $value     Valeur du champ (Facultatif)
+     * @param string $label     Label pour le champ si nécessaire (Facultatif)
      *
      * D'autres attributs sont possibles sous réserve qu'ils soient définis
      * dans le constructeur ou les classes parentes. Par exemple, l'attribut
      * style est générique et peut être alimenté avec la méthode setAttribute().
      *
-     * @param   Array   $props      Voir ci-dessus
-     * @param   String  $doctype    Standard à utiliser (HTML ou XHTML par défaut)
-     * @param   Object  $oForm      Instance du formulaire en cours de construction
+     * @param   array   $props      Voir ci-dessus
+     * @param   string  $doctype    Standard à utiliser (HTML ou XHTML par défaut)
+     * @param   form    $oForm      Instance du formulaire en cours de construction
      */
-    public function __construct($props, $doctype, form $oForm)
+    public function __construct(array $props, string $doctype, form $oForm)
     {
         /**
          * Initialisation des propriétés de base.
@@ -68,11 +68,11 @@ class hidden extends input
      * Surcharge de la méthode pour ajouter un enregistrement de la nouvelle
      * chaine dans les champs cachés du formulaire.
      *
-     * @param   String $attr    Attribut de la balise
-     * @param   String $value   Valeur à affecter à la balise.
-     * @return  Object
+     * @param   string $attr    Attribut de la balise
+     * @param   string $value   Valeur à affecter à la balise.
+     * @return  hidden
      */
-    public function setAttribute($attr, $value = null)
+    public function setAttribute(string $attr, string $value = null): hidden
     {
         if(array_key_exists($attr, $this->_aAttributs))
         {

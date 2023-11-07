@@ -5,7 +5,7 @@ use jemdev\form\process\validation;
 use jemdev\form\tags\attributs_html5;
 use jemdev\form\tags\attributs_xhtml;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -17,9 +17,9 @@ use jemdev\form\tags\attributs_xhtml;
  * Classe abstraite définissant les règles de création de
  * champs de formulaires.
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  */
 abstract class field
 {
@@ -32,13 +32,13 @@ abstract class field
     /**
      * Sorte de balise html
      *
-     * @var String
+     * @var string
      */
     protected $_tag;
     /**
      * Type pour les balise input
      *
-     * @var String
+     * @var string
      */
     protected $_type        = null;
     /**
@@ -46,38 +46,38 @@ abstract class field
      * Deux valeurs sont possibles, HTML ou XHTML, par défaut, ce
      * sera XHTML
      *
-     * @var String
+     * @var string
      */
     protected $_sDoctype    = 'XHTML';
     /**
      * Contenu de la balise lorsqu'il ne s'agit pas d'une balide vide.
      * Ne concerne ici que les balsies select et textarea.
      *
-     * @var String
+     * @var string
      */
     protected $_contenu     = null;
     /**
      * Attributs HTML de la balise
      *
-     * @var Array
+     * @var array
      */
     protected $_aAttributs  = array();
     /**
      * Label du champ de formulaire
      *
-     * @var String
+     * @var string
      */
     protected $_label;
     /**
      * Valeur du champ.
      *
-     * @var String
+     * @var string
      */
     protected $_valChamp    = null;
     /**
      * Option sélectionnée dans le cas d'un champ de type select
      *
-     * @var String
+     * @var string
      */
     protected $_optionSelected = null;
     /**
@@ -95,19 +95,19 @@ abstract class field
      * Stockage des valeurs d'une saisie précédente pour ré-affichage
      * si des erreurs ont été relevées.
      *
-     * @var Array
+     * @var array
      */
     protected $_aSentDatas  = array();
     /**
      * Stockage des règles définies pour le champ en cours de construction
      *
-     * @var Array
+     * @var array
      */
     protected $_aRules      = array();
     /**
      * Indique si le champ a déjà été défini comme obligatoire.
      *
-     * @var Boolean
+     * @var bool
      */
     protected $_bRequis     = false;
     protected $_locale      = 'fr';
@@ -116,8 +116,8 @@ abstract class field
     /**
      * Constructeur.
      *
-     * @param   String  $locale
-     * @param   Object  $oForm
+     * @param   string  $locale
+     * @param   form    $oForm
      */
     public function __construct(form $oForm)
     {
@@ -159,7 +159,15 @@ abstract class field
         $this->_setMethodesSuppl();
     }
 
-    public function setListeAttributs($tag, $type = null)
+    /**
+     * Établissement de la liste des balises valides selon le DOCTYPE utilisé.
+     * 
+     * @param string $tag
+     * @param string|null $type
+     * 
+     * @return void
+     */
+    public function setListeAttributs(string $tag, ?string $type = null):void
     {
         if(!is_null($this->_tag))
         {
@@ -198,11 +206,11 @@ abstract class field
      * un DOCTYPE non répertorié est mis en oeuvre, n'importe quel attribut pourra
      * être utilisé, conforme ou non.
      *
-     * @param   String $attr    Attribut de la balise
-     * @param   String $value   Valeur à affecter à la balise.
-     * @return  Object
+     * @param   string $attr    Attribut de la balise
+     * @param   string $value   Valeur à affecter à la balise.
+     * @return  form
      */
-    public function setAttribute($attr, $value = null)
+    public function setAttribute(string $attr, ?string $value = null): form
     {
         if($this->_tag == 'textarea' && $attr == 'value')
         {
@@ -234,10 +242,10 @@ abstract class field
     /**
      * Ajout d'un label pour le champ de formulaire
      *
-     * @param   String $label
-     * @return  Object
+     * @param   string $label
+     * @return  form
      */
-    public function setLabel($label)
+    public function setLabel(string $label): form
     {
         if(true === $this->_bRequis)
         {
@@ -250,9 +258,9 @@ abstract class field
     /**
      * Récupération de la valeur du label
      *
-     * @return String
+     * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->_label;
     }
@@ -260,10 +268,10 @@ abstract class field
     /**
      * Récupération de la valeur de propriété de l'instance.
      *
-     * @param   String $prop
-     * @return  String
+     * @param   string $prop
+     * @return  string
      */
-    public function __get($prop)
+    public function __get(string $prop): string
     {
         if($prop == 'label')
         {
@@ -321,9 +329,9 @@ abstract class field
      * dont on veut pouvoir modifier le contenu, par exemple la balise
      * textarea peut avoir un contenu.
      *
-     * @param   String $contenu
+     * @param   string $contenu
      */
-    public function setContenu($contenu)
+    public function setContenu(string $contenu): void
     {
         trigger_error($this->_oForm->_aExceptionErreurs['contenu_interdit'], E_USER_NOTICE);
     }
@@ -348,14 +356,15 @@ abstract class field
      * - comparer       = 0 => attribut name du champ à comparer
      * - callback       = 0 => instance de la classe externe, 1 => méthode à invoquer
      *
-     * @param   String  $rule       Nom de la règle à appliquer
-     * @param   String  $msg        Message à afficher si règle non vérifiée.
-     * @param   Array   $val        Valeur à vérifier (Optionnel selon la règle à appliquer)
+     * @param   string  $rule       Nom de la règle à appliquer
+     * @param   string  $msg        Message à afficher si règle non vérifiée.
+     * @param   array   $val        Valeur à vérifier (Optionnel selon la règle à appliquer)
      * @see     jemdev\form\process\validation
-     * @todo    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
+     * 
+     * @TODO    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
      *          de tableaux que de valeurs scalaires.
      */
-    public function setRule($rule, $msg, $val = null)
+    public function setRule(string $rule, string $msg, ?array $val = null): form
     {
         if($rule == 'required' || $rule == 'differentDe')
         {
@@ -406,9 +415,9 @@ abstract class field
      * ou encore monchamp[1][2] (deux à 7 niveaux, index numériques ou chaines.)
      *
      * @param   Object  $aField
-     * @param   Array   $aDatas
+     * @param   array   $aDatas
      */
-    public static function getValueFromArrayData($name, $aDatas)
+    public static function getValueFromArrayData(field $name, array $aDatas): string
     {
         $masque = "#^[^[]+(\[[^]]+\])+#";
         if(preg_match($masque, $name))
@@ -434,7 +443,7 @@ abstract class field
      * Ajoute les méthodes spécifiques de validation du helper
      * à la collection de méthodes génériques de base.
      */
-    private function _setMethodesSuppl()
+    private function _setMethodesSuppl(): void
     {
         if(count($this->_oForm->_aClasseValidationExterne) > 0)
         {
@@ -459,7 +468,8 @@ abstract class field
     /**
      * Retourne la chaine correspondant à l'objet instancié.
      */
-    public function __toString(){
+    public function __toString(): string
+    {
         return('');
     }
 }

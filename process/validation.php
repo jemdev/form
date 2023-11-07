@@ -2,7 +2,7 @@
 namespace jemdev\form\process;
 use jemdev\form\field;
 /**
- * @package     mje
+ * @package     jemdev
  *
  * Ce code est fourni tel quel sans garantie.
  * Vous avez la liberté de l'utiliser et d'y apporter les modifications
@@ -103,9 +103,9 @@ use jemdev\form\field;
  *   </li>
  * </ul>
  *
- * @author      Jean Molliné <jmolline@gmail.com>
- * @package     mje
- * @subpackage  Form
+ * @author      Jean Molliné <jmolline@jem-dev.com>
+ * @package     jemdev
+ * @subpackage  form
  * @todo        Validation de certaines valeurs avec la méthode filter_var() et les
  *              constantes nativement pré-définies.
  */
@@ -142,21 +142,21 @@ class validation
     /**
      * Données postées
      *
-     * @var Array
+     * @var array
      */
     protected $_aDatas;
 
     /**
      * Règles de validation du formulaire traité
      *
-     * @var Array
+     * @var array
      */
     private $_aRules;
 
     /**
      * Liste des erreurs relevées lors de la validation des données.
      *
-     * @var Array
+     * @var array
      */
     private $_aErreursRelevees  = array();
 
@@ -166,14 +166,14 @@ class validation
      * en français ou en anglais. Rien n'interdit de créer d'autres fichiers dans
      * d'autres langues.
      *
-     * @var Array
+     * @var array
      */
     private $_aExceptionmessages;
 
     /**
      * Liste des méthodes génériques de validation.
      *
-     * @var Array
+     * @var array
      */
     public static $methodesValidation = array(
         "required",
@@ -201,15 +201,17 @@ class validation
     /**
      * Constructeur.
      *
-     * @param   Array   $aDatas
-     * @param   Object  $oRules
+     * @param array $aDatas
+     * @param array $aRules
+     * @param array $msgs_exceptions
      */
-    public function __construct($aDatas, $aRules, $msgs_exceptions)
+    public function __construct(array $aDatas, array $aRules, array $msgs_exceptions)
     {
         $this->_aDatas = $aDatas;
         $this->_aRules = isset($aRules) && is_array($aRules) ? $aRules : array();
         $this->_aExceptionmessages = $msgs_exceptions;
     }
+
     /**
      * Validation des règles de gestion du formulaire.
      *
@@ -218,9 +220,9 @@ class validation
      * On ne vérifiera qu'une règle à la fois par champ : si elle retourne
      * une erreur, on arrêtera la vérification pour passer au champ suivant.
      *
-     * @return  Array
+     * @return  array
      */
-    public function validerInfos()
+    public function validerInfos(): array
     {
         foreach($this->_aRules as $champ => $aRegles)
         {
@@ -273,19 +275,19 @@ class validation
                     {
                         if(is_array($this->_aRules[$champ][$i][0]) && $nbp > 1)
                         {
-                            $params = array($dataChamp);
+                            $valeur = array($dataChamp);
                             for($a = 1; $a < $nbp; $a++)
                             {
-                                $params[] = $this->_aRules[$champ][$i][0][$a];
+                                $valeur[] = $this->_aRules[$champ][$i][0][$a];
                             }
                             $msg = $this->_aRules[$champ][$i][1];
                         }
                         else
                         {
-                            $params = $dataChamp;
+                            $valeur = $dataChamp;
                             $msg = $this->_aRules[$champ][$i][1];
                         }
-                        $p = $params;
+                        $p = $valeur;
                     }
                     else
                     {
@@ -336,7 +338,7 @@ class validation
         return($this->_aErreursRelevees);
     }
 
-    public function getListeMethodes()
+    public function getListeMethodes(): array
     {
         return get_class_methods($this);
     }
@@ -346,10 +348,10 @@ class validation
      * On prendra soin de supprimer les espaces de début et de fin de chaine
      * afin de vérifier que la chaine contient réellement au moins un caractère.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _required($valeur)
+    protected function _required(string $valeur): bool
     {
         $val = (is_array($valeur)) ? trim($valeur[0]) : trim($valeur);
         $retour = ($val !== "") ? true : false;
@@ -363,10 +365,10 @@ class validation
     /**
      * Vérifie la validité d'une adresse de courrier électronique.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _email($valeur)
+    protected function _email(string $valeur): bool
     {
         return filter_var($valeur, FILTER_VALIDATE_EMAIL);
     }
@@ -374,10 +376,10 @@ class validation
     /**
      * Vérifie la validité de la syntaxe d'une URL
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _url($valeur)
+    protected function _url(string $valeur): bool
     {
         return(filter_var($valeur, FILTER_VALIDATE_URL));
     }
@@ -387,10 +389,10 @@ class validation
      * N'accepte que des lettres de l'aphabet, éventuellement accentuées,
      * ni espaces ni caractères spéciaux.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _alpha($valeur)
+    protected function _alpha(string $valeur): bool
     {
         return (preg_match(self::V_ALPHA, $valeur)) == 1 ? true : false;
     }
@@ -400,10 +402,10 @@ class validation
      * N'accepte que des lettres de l'aphabet, éventuellement accentuées,
      * plus les espaces, guillemets et apostrophes.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _word($valeur)
+    protected function _word(string $valeur): bool
     {
         return (preg_match(self::V_WORD, $valeur)) == 1 ? true : false;
     }
@@ -413,10 +415,10 @@ class validation
      * Accepte des lettres de l'aphabet, éventuellement accentuées,
      * plus les chiffres, les espaces, les guillemets et les apostrophes.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _alnum($valeur)
+    protected function _alnum(string $valeur): bool
     {
         $resultat = preg_match(self::V_ALNUM, $valeur) == 1 ? true : false;
         return($resultat);
@@ -426,10 +428,10 @@ class validation
      * Vérifie la validité de la syntaxe d'une chaine de chiffres
      * Chiffres exclusivement, ni espace ni ponctuation ni caractères spéciaux.
      *
-     * @param   String  $valeur
-     * @return  Boolean
+     * @param   string  $valeur
+     * @return  bool
      */
-    protected function _num($valeur)
+    protected function _num(string $valeur): bool
     {
         return (preg_match(self::V_NUM, $valeur)) == 1 ? true : false;
     }
@@ -440,9 +442,9 @@ class validation
      * Ni espace ni aucun autre caractère.
      *
      * @param   Float   $valeur
-     * @return  Boolean
+     * @return  bool
      */
-    protected function _float($valeur)
+    protected function _float(string $valeur): bool
     {
         $val = str_replace(' ', '', $valeur);
         return (preg_match(self::V_FLOAT, $val)) == 1 ? true : false;
@@ -451,11 +453,10 @@ class validation
     /**
      * Vérifie que la chaine comporte au moins un certain nombre de caractères.
      *
-     * @param   String  $valeur
-     * @param   Int     $longmini
-     * @return  Boolean
+     * @param   array   $valeur valeur du champ $valeur[0] et nombre minimum $valeur[1]
+     * @return  bool
      */
-    protected function _minlength($valeur)
+    protected function _minlength(array $valeur): bool
     {
         return (strlen($valeur[0]) >= $valeur[1]);
     }
@@ -463,11 +464,10 @@ class validation
     /**
      * Vérifie que la chaine comporte au maximum un certain nombre de caractères.
      *
-     * @param   String  $valeur
-     * @param   Int     $longmaxi
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0] et nombre maximum $valeur[1]
+     * @return  bool
      */
-    protected function _maxlength($valeur)
+    protected function _maxlength(string $valeur): bool
     {
         return(strlen($valeur[0]) <= $valeur[1]);
     }
@@ -476,25 +476,22 @@ class validation
      * Vérifie que la chaine comporte un nombre de caractères compris entre
      * un minimum et un maximum donné.
      *
-     * @param   String  $valeur
-     * @param   Int     $longmini
-     * @param   Int     $longmaxi
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0], nombre minimum $valeur[1][0] et nombre maximum $valeur[1][1]
+     * @return  bool
      */
-    protected function _rangelength($params)
+    protected function _rangelength(array $valeur)
     {
-        $l = strlen($params[0]);
-        return($l <= $params[1][1] && $l >= $params[1][0]);
+        $l = strlen($valeur[0]);
+        return($l <= $valeur[1][1] && $l >= $valeur[1][0]);
     }
 
     /**
      * Vérifie que la valeur est supérieure ou égale à une valeur minimum.
      *
-     * @param   String  $valeur
-     * @param   Int     $valmini
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0] et valeur minimale attendue $valeur[1]
+     * @return  bool
      */
-    protected function _minval($valeur)
+    protected function _minval(array $valeur): bool
     {
         $retour = (($valeur[0]) >= $valeur[1]) ? true : false;
         return $retour;
@@ -503,11 +500,10 @@ class validation
     /**
      * Vérifie que la valeur est inférieure ou égale à une valeur maximum.
      *
-     * @param   String  $valeur
-     * @param   Int     $valmaxi
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0] et valeur maximale attendue $valeur[1]
+     * @return  bool
      */
-    protected function _maxval($valeur)
+    protected function _maxval(array $valeur): bool
     {
         return($valeur[0] <= $valeur[1]);
     }
@@ -515,24 +511,21 @@ class validation
     /**
      * Vérifie que la valeur est comprise entre une valeur maximum et une valeur minimum.
      *
-     * @param   String  $valeur
-     * @param   Int     $valmini
-     * @param   Int     $valmaxi
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0], valeur minimale attendue $valeur[1][0] et valeur maximale attendue $valeur[1][1]
+     * @return  bool
      */
-    protected function _rangeval($params)
+    protected function _rangeval(array $valeur)
     {
-        return($params[0] >= $params[1][0] && $params[0] <= $params[1][1]);
+        return($valeur[0] >= $valeur[1][0] && $valeur[0] <= $valeur[1][1]);
     }
 
     /**
      * Vérifie que la valeur est strictement inférieure à une valeur maximum
      *
-     * @param   String  $valeur
-     * @param   Int     $limitemaxi
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0] et limite inférieure de la valeur attendue $valeur[1]
+     * @return  bool
      */
-    protected function _inferieur($valeur)
+    protected function _inferieur(array $valeur): bool
     {
         return($valeur[0] < $valeur[1]);
     }
@@ -540,11 +533,10 @@ class validation
     /**
      * Vérifie que la valeur est strictement supérieure à une valeur minimum
      *
-     * @param   String  $valeur
-     * @param   Int     $limitemini
-     * @return  Boolean
+     * @param   array   $valeur     valeur du champ $valeur[0] et limite supérieure de la valeur attendue $valeur[1]
+     * @return  bool
      */
-    protected function _superieur($valeur)
+    protected function _superieur(array $valeur): bool
     {
         return($valeur[0] > $valeur[1]);
     }
@@ -556,11 +548,10 @@ class validation
      * L'expression régulière envoyée devra comporter les délimiteurs de
      * début et de fin.
      *
-     * @param   String  $valeur
-     * @param   String  $masque
-     * @return  Boolean
+     * @param   array   $valeur     Valeur du champ $valeur[0] et expression régulière à appliquer $valeur[1]
+     * @return  bool
      */
-    protected function _regex($valeur)
+    protected function _regex(array $valeur): bool
     {
         $retour = (preg_match($valeur[1], $valeur[0]) == 1) ? true : false;
         return $retour;
@@ -587,10 +578,10 @@ class validation
      *   [1]=> string(5) "d/m/Y"
      * }
      *
-     * @param   String  $valeur Tableau contenant la date et le format à valider
-     * @return  Boolean
+     * @param   array   $valeur Tableau contenant la date et le format à valider
+     * @return  bool
      */
-    protected function _formatdateheure($valeur)
+    protected function _formatdateheure(array $valeur): bool
     {
         $retour = false;
         if(is_array($valeur))
@@ -643,11 +634,10 @@ class validation
      * L'application de la règle comportera trois paramètres sous la forme :
      * $objetChamp->setRule('validedate',"Message d'erreur", 'd/m/Y');
      *
-     * @param   String  $valeur
-     * @param   String  $format
-     * @return  Boolean
+     * @param   array   $valeur Valeur du champ $valeur[0] et format à appliquer $valeur[1]
+     * @return  bool
      */
-    protected function _validedate($valeur)
+    protected function _validedate(array $valeur): bool
     {
         if(false !== $this->_formatdateheure(array($valeur[0], $valeur[1])))
         {
@@ -727,10 +717,10 @@ class validation
     /**
      * Compare deux valeurs et retourne vrai si les deux chaines sont identiques.
      *
-     * @param   Array   $valeur2
-     * @return  Boolean
+     * @param   array   $valeur     Valeur du champ $valeur[0] et valeur attendue $valeur[1]
+     * @return  bool
      */
-    protected function _comparer($valeur)
+    protected function _comparer(array $valeur): bool
     {
         return ($valeur[0] == $valeur[1]);
     }
@@ -738,10 +728,10 @@ class validation
     /**
      * Vérifie que la valeur saisie est différente de l'argument
      *
-     * @param   Array $params
-     * @return  Boolean
+     * @param   array $valeur   $valeur du champ $valeur[0] et valeur de comparaison $valeur[1]
+     * @return  bool
      */
-    protected function _differentDe($valeur)
+    protected function _differentDe(array $valeur): bool
     {
         return ($valeur[0] != $valeur[1]);
     }
@@ -751,10 +741,10 @@ class validation
      *
      * Retourne false s'il n'y a pas d'index.
      *
-     * @param  String $champ
-     * @return Array
+     * @param  string $champ    Nom du champ à vérifier
+     * @return array
      */
-    private function _stringToArray($champ)
+    private function _stringToArray(array $champ): array
     {
         $masque = "#([a-zA-Z0-9_]+)(?:\[([0-9]+)\](?:\[([0-9]+)\])?)#i";
         $retour = false;
@@ -772,7 +762,7 @@ class validation
         return $retour;
     }
 
-    private function _requiredHtmlTextarea($valeur)
+    private function _requiredHtmlTextarea(string $valeur): bool
     {
         $contenu = strip_tags($valeur);
         $txt = trim($contenu);
