@@ -243,9 +243,9 @@ abstract class field
      * Ajout d'un label pour le champ de formulaire
      *
      * @param   string $label
-     * @return  form
+     * @return  field
      */
-    public function setLabel(string $label): form
+    public function setLabel(string $label): field
     {
         if(true === $this->_bRequis)
         {
@@ -364,7 +364,7 @@ abstract class field
      * @TODO    Tenter de simplifier le passage de paramètre pour permettre indifféremment l'envoi
      *          de tableaux que de valeurs scalaires.
      */
-    public function setRule(string $rule, string $msg, ?array $val = null): form
+    public function setRule(string $rule, string $msg, ?array $val = null): field
     {
         if($rule == 'required' || $rule == 'differentDe')
         {
