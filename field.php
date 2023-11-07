@@ -258,9 +258,9 @@ abstract class field
     /**
      * Récupération de la valeur du label
      *
-     * @return string
+     * @return string|null
      */
-    public function getLabel(): string
+    public function getLabel(): string|null
     {
         return $this->_label;
     }
@@ -271,7 +271,7 @@ abstract class field
      * @param   string $prop
      * @return  string
      */
-    public function __get(string $prop): string
+    public function __get(string $prop): string|null
     {
         if($prop == 'label')
         {
