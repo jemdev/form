@@ -210,7 +210,7 @@ abstract class field
      * @param   string $value   Valeur à affecter à la balise.
      * @return  form
      */
-    public function setAttribute(string $attr, ?string $value = null): form
+    public function setAttribute(string $attr, ?string $value = null)
     {
         if($this->_tag == 'textarea' && $attr == 'value')
         {

@@ -70,9 +70,9 @@ class hidden extends input
      *
      * @param   string $attr    Attribut de la balise
      * @param   string $value   Valeur à affecter à la balise.
-     * @return  hidden
+     * @return  form
      */
-    public function setAttribute(string $attr, string $value = null): hidden
+    public function setAttribute(string $attr, string $value = null)
     {
         if(array_key_exists($attr, $this->_aAttributs))
         {
