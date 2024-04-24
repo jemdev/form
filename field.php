@@ -331,7 +331,7 @@ abstract class field
      *
      * @param   string $contenu
      */
-    public function setContenu(string $contenu): void
+    public function setContenu(string $contenu): field
     {
         trigger_error($this->_oForm->_aExceptionErreurs['contenu_interdit'], E_USER_NOTICE);
     }
