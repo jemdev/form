@@ -165,7 +165,7 @@ class form
      *
      * @var array
      */
-    private $_aReglesValidation;
+    private $_aReglesValidation =   [];
     /**
      * Classe de validation étendue propre au formulaire en cours.
      * Tableau associatif contenant deux valeurs :
