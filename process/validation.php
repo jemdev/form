@@ -205,10 +205,10 @@ class validation
      * @param array $aRules
      * @param array $msgs_exceptions
      */
-    public function __construct(array $aDatas, array $aRules, array $msgs_exceptions)
+    public function __construct(array $aDatas, array $aRules = [], array $msgs_exceptions = [])
     {
         $this->_aDatas = $aDatas;
-        $this->_aRules = isset($aRules) && is_array($aRules) ? $aRules : array();
+        $this->_aRules = $aRules;
         $this->_aExceptionmessages = $msgs_exceptions;
     }
 
