@@ -417,9 +417,9 @@ abstract class field
      * @param   string  $aField
      * @param   array   $aDatas
      * 
-     * @return string|null
+     * @return mixed
      */
-    public static function getValueFromArrayData(string $name, array $aDatas): string|null
+    public static function getValueFromArrayData(string $name, array $aDatas): mixed
     {
         $masque = "#^[^[]+(\[[^]]+\])+#";
         if(preg_match($masque, $name))
