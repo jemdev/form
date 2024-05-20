@@ -302,7 +302,7 @@ class validation
                         $msg = $this->_aRules[$champ][$i][1];
                         $p = '';
                     }
-                    $bVerif = ((true == $bRequis || $sRegle == 'required') && ((!is_array($p) && strlen($p) > 0) || (is_array($p) && strlen($p[0]) > 0)));
+                    $bVerif = ((true == $bRequis || $sRegle == 'required') && ((!is_array($p) && !is_null($p) && strlen($p) > 0) || (is_array($p) && isset($p[0]) && strlen($p[0]) > 0)));
                     $v   = (true == $bVerif)
                         ? call_user_func(array($this, '_'. $sRegle), $p)
                         : true;
